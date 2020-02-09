@@ -1,1 +1,1 @@
-![Logo](https://raw.githubusercontent.com/florango/website/master/assets/images/florango-logo.svg "")
+![Logo](/assets/images/florango-logo.svg "")
