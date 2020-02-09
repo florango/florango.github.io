@@ -1,0 +1,10 @@
+@import url("https://helix-pages-adobe.hlx.page/style.css");
+
+header {
+    background-color: #879988;
+    text-align: center;
+}
+
+header img {
+    height: 200px;
+}
