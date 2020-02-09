@@ -11,6 +11,11 @@ header img {
     fill: grey;
 }
 
-h2 {
-
+main a {
+    border-radius: 20px;
+    background-color: #879988;
+    color: white;
+    text-decoration: none;
+    padding: 5px 20px;
+    font-weight: 700;
 }
