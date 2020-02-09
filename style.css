@@ -60,3 +60,24 @@ main a {
     padding: 5px 20px;
     font-weight: 700;
 }
+
+footer {
+    display: flex;
+    background-color: #879988;
+    color: #ede6d2;
+    columns: 33% 33% 33%;
+    justify-content: center;
+}
+
+footer img {
+    height: 90px;
+}
+
+footer>* {
+    width: 25%;
+}
+footer p {
+    font-size: 17px;
+    align-self: center;
+    padding: 20px;
+}
