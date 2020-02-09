@@ -24,19 +24,32 @@ main {
     width: 100%;
 }
 
-main>div:nth-of-type(4)>* {
-    width: 800px;
+@media (min-width:900px) {
+    main>div.default>* {
+        width: 800px;
+    }
+
+    main>div.default {
+        display: flex;
+        flex-direction: column;
+        margin: 0;
+        width: 100%;
+        box-sizing: border-box;
+        align-items: center;
+    
+    }
 }
+
+
 
 main>div:nth-of-type(4) {
     background-color: #383845;
     color: #EDE6D2;
-    display: flex;
-    flex-direction: column;
-    margin: 0;
-    width: 100%;
-    align-items: center;
+}
 
+main>div:nth-of-type(6) {
+    background-color: #B4C7B6;
+    color: #879988;
 }
 
 main a {
