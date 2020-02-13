@@ -1,5 +1,6 @@
 @import url("https://helix-pages-adobe.hlx.page/style.css");
 @import url('https://fonts.googleapis.com/css?family=Hammersmith+One&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Josefin+Sans&display=swap');
 
 header {
     background-color: #879988;
@@ -16,7 +17,11 @@ div.image {
     line-height: 0;
 }
 
-body, h1, h2, h3 {
+body {
+    font-family: 'Josefin Sans', sans-serif;
+}
+
+h1, h2, h3 {
     font-family: 'Hammersmith One', sans-serif;
 }
 
@@ -53,12 +58,19 @@ main>div:nth-of-type(6) {
 }
 
 main a {
-    border-radius: 20px;
+    border-radius: 0px;
+    border-style: solid;
+    border-width: 2px;
+    border-color: #EDE6D2;
     background-color: #879988;
-    color: white;
+    color: #EDE6D2;
     text-decoration: none;
-    padding: 5px 20px;
-    font-weight: 700;
+    padding: 12px 20px 10px 20px;    
+    font-weight: 400;
+    outline-style: solid;
+    outline-color: #879988;
+    outline-width: 4px;
+    text-transform: uppercase;    
 }
 
 footer {
