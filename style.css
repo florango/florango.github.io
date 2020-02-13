@@ -70,7 +70,9 @@ main a {
     outline-style: solid;
     outline-color: #879988;
     outline-width: 4px;
-    text-transform: uppercase;    
+    text-transform: uppercase;
+    margin: 15px;
+    margin-bottom: 30px;
 }
 
 footer {
