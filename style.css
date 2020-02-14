@@ -5,7 +5,7 @@
 header {
     background-color: #879988;
     text-align: center;
-    padding: 10px;
+    padding: 10px;    
 }
 
 header img {
@@ -20,6 +20,7 @@ div.image {
 body {
     font-family: 'Josefin Sans', sans-serif;
     background-color: #EDE6D2;
+    color: #383845;
 }
 
 h1, h2, h3 {
@@ -28,6 +29,14 @@ h1, h2, h3 {
 
 main {
     width: 100%;
+}
+
+main .header h1 {
+    color: #EDE6D2;
+}
+
+main .header p {
+    color: #EDE6D2;
 }
 
 @media (min-width:900px) {
