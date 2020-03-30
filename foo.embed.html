@@ -1,3 +1,30 @@
+<script src="https://js.recurly.com/v4/recurly.js"></script>
+<link href="https://js.recurly.com/v4/recurly.css" rel="stylesheet" type="text/css">
+
+<script>
+    recurly.configure('ewr1-9VF1yLNIIqNIUHCRrP4Sfr');    
+</script>
+
 <div class="josh">
-    This is a test
+    <form id="my-form">
+        <input type="text" data-recurly="first_name">
+        <input type="text" data-recurly="last_name">
+      
+        <div id="recurly-elements">
+          <!-- Recurly Elements will be attached here -->
+        </div>
+      
+        <!-- Recurly.js will update this field automatically -->
+        <input type="hidden" name="recurly-token" data-recurly="token">
+      
+        <button>submit</button>
+      </form>
+    
+    This is a test...
 </div>
+
+<script>
+    const elements = recurly.Elements();
+    const cardElement = elements.CardElement();
+    cardElement.attach('#recurly-elements');
+</script>
