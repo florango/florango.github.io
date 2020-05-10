@@ -11,6 +11,10 @@ header {
     width: 100%;
 }
 
+header a:any-link {
+    color: #EDE6D2;
+}
+
 header img {
     height: 30px;
     fill: grey;
@@ -143,6 +147,9 @@ footer p {
 
 
 
+
+
+
 /* Button styling */
 .menu-toggle {
     display: inline-block;
@@ -162,6 +169,10 @@ footer p {
    Offscreen menu style
   */
   .main-menu {
+    font-family: 'Hammersmith One', sans-serif;
+    text-transform: uppercase;
+    font-size: 1em;
+    color: #EDE6D2;
     position: absolute;
     display: none;
     left: -200px;
@@ -192,7 +203,6 @@ footer p {
     padding: .75em 15px;
     line-height: 1em;
     font-size: 1em;
-    color: #fff;
     text-decoration: none;
     border-bottom: 1px solid #383838;
   }
@@ -300,14 +310,13 @@ footer p {
     }
     
     .main-menu a {
-      color: #06c;
+      color: #EDE6D2;
       border: 0 !important; /* Remove borders from off-canvas styling */
     }
     
     .main-menu a:hover,
     .main-menu a:focus {
-      background: none; /* Remove background from off-canvas styling */
-      color: #000;
+      background: none; /* Remove background from off-canvas styling */      
       text-decoration: none;
     }
   }
