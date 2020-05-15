@@ -1,0 +1,32 @@
+<div id="enter-zip">
+    <input id="zip" type="text" name="zip"/><button id="check-zip">Go!</button>
+</div>
+<div id="choose-product">
+    Choose product!
+</div>
+<div id="available-soon">
+    Available soon!
+</div>
+
+<script>
+    let enterZipEl = document.querySelector('#enter-zip');
+    let checkZipEl = document.querySelector('#check-zip');
+    checkZipEl.onclick = () => {
+        //let zip = doc
+        alert(3)
+        let chooseProductEl = document.querySelector('#choose-product');
+        enterZipEl.style.display = 'none';
+        chooseProductEl.style.display = 'block';
+        
+    }
+</script>
+
+<style>
+    #choose-product {
+        display: none;
+    }
+
+    #available-soon {
+        display: none;
+    }
+</style>
