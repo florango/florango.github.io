@@ -1,16 +1,17 @@
-<div id="products">
+<section id="products">
     <div id="enter-zip">
         <h3>We need to make sure you're within our Delivery Network</h3> Please enter the ZipCode of the intended Delivery Address so we can make sure we're able to get to you!
         <input id="zip" type="text" name="zip"/><a href="#" id="check-zip">Go!</a>
     </div>
     <div id="choose-product">
+        <h3>Yay! We deliver in your area!</h3> 
+        Now select the frequency that would like to have fresh, local flowers delivered! 
         <a href="https://subscriptions.zoho.com/subscribe/09dd718b7495e52928b10be395c1ecd26a2bba0f6b053217ad482bf477cf719e/weeklyhome">Every Week</a>
-            <a href="https://subscriptions.zoho.com/subscribe/09dd718b7495e52928b10be395c1ecd26a2bba0f6b053217ad482bf477cf719e/biweeklyhome">Every 2 Weeks</a>
-            <a href="https://subscriptions.zoho.com/subscribe/09dd718b7495e52928b10be395c1ecd26a2bba0f6b053217ad482bf477cf719e/monthlyhome">Once a Month</a>
-        
-
+        <a href="https://subscriptions.zoho.com/subscribe/09dd718b7495e52928b10be395c1ecd26a2bba0f6b053217ad482bf477cf719e/biweeklyhome">Every 2 Weeks</a>
+        <a href="https://subscriptions.zoho.com/subscribe/09dd718b7495e52928b10be395c1ecd26a2bba0f6b053217ad482bf477cf719e/monthlyhome">Once a Month</a>
     </div>
     <div id="available-soon">
+        <h3>Aw snap! We aren't in your area yet!</h3> But we're expanding our network as quickly as we can. Enter your info and we'll keep you posted on our progress and let you know when we're able to deliver to you.
         Name <input id="Name"/>
         Email <input id="Email"/>
         Phone <input id="Phone"/>
@@ -20,7 +21,8 @@
     <div id="thanks-for-info">
         Thanks for letting us know you're interested! We're growing our delivery area every day, and will be in touch when we can provide you with fresh flowers!
     </div>
-</div>
+</section>
+
 <script>
     let enterZipEl = document.querySelector('#enter-zip');
     let checkZipEl = document.querySelector('#check-zip');
@@ -76,6 +78,9 @@
                 thanksForInfoEl.style.display = 'block';
             });            
         }
+        
+        let subsDivEl = upTo(enterZipEl, 'div')
+        subsDivEl.id = 'subs'
 </script>
 
 <style>
@@ -102,7 +107,8 @@
         outline-style: none;
         outline-color: #879988;
         outline-width: 4px;
-        text-transform: uppercase;        
+        text-transform: uppercase;
+        margin: 10px;    
     }
 
     #products input {
