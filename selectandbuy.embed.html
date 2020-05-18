@@ -31,6 +31,8 @@
     let thanksForInfoEl = document.querySelector('#thanks-for-info');
     let interestedButtonEl = document.querySelector('#interested');
     let userZip;
+    let subsDivEl = upTo(enterZipEl, 'div')
+    subsDivEl.id = 'subs'
     checkZipEl.onclick = (event) => {
         event.preventDefault();
         userZip = document.querySelector('#zip').value;        
@@ -43,19 +45,22 @@
                     zipValid = true;
                 }
             })
-            if(zipValid) {                
+            if(zipValid) {
+                subsDivEl.scrollIntoView();
                 enterZipEl.style.display = 'none';
-                chooseProductEl.style.display = 'block';
+                chooseProductEl.style.display = 'block';                
             } else {
                 document.getElementById('Zip').value = userZip;
+                subsDivEl.scrollIntoView();
                 enterZipEl.style.display = 'none';
-                availableSoonEl.style.display = 'block';
+                availableSoonEl.style.display = 'block';                
             }
         });
         
         interestedButtonEl.onclick = (event) => {
             event.preventDefault();
             appendLog();
+            subsDivEl.scrollIntoView();
         }   
         
     }
@@ -79,8 +84,7 @@
             });            
         }
         
-        let subsDivEl = upTo(enterZipEl, 'div')
-        subsDivEl.id = 'subs'
+        
 </script>
 
 <style>
