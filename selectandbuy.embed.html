@@ -1,24 +1,81 @@
-<div id="enter-zip">
-    <input id="zip" type="text" name="zip"/><button id="check-zip">Go!</button>
-</div>
-<div id="choose-product">
-    Choose product!
-</div>
-<div id="available-soon">
-    Available soon!
-</div>
+<div id="products">
+    <div id="enter-zip">
+        <input id="zip" type="text" name="zip"/><a href="#" id="check-zip">Go!</a>
+    </div>
+    <div id="choose-product">
+        <ul>
+            <li><a href="https://subscriptions.zoho.com/subscribe/09dd718b7495e52928b10be395c1ecd26a2bba0f6b053217ad482bf477cf719e/weeklyhome">Every Week</a></li>
+            <li><a href="https://subscriptions.zoho.com/subscribe/09dd718b7495e52928b10be395c1ecd26a2bba0f6b053217ad482bf477cf719e/biweeklyhome">Every 2 Weeks</a></li>
+            <li><a href="https://subscriptions.zoho.com/subscribe/09dd718b7495e52928b10be395c1ecd26a2bba0f6b053217ad482bf477cf719e/monthlyhome">Once a Month</a></li>
+        </ul>
 
+    </div>
+    <div id="available-soon">
+        Name <input id="Name"/>
+        Email <input id="Email"/>
+        Phone <input id="Phone"/>
+        <input id="Zip" hidden="true"/>
+        <a href="#" id="interested">Submit</a>
+    </div>
+    <div id="thanks-for-info">
+        Thanks for letting us know you're interested! We're growing our delivery area every day, and will be in touch when we can provide you with fresh flowers!
+    </div>
+</div>
 <script>
     let enterZipEl = document.querySelector('#enter-zip');
     let checkZipEl = document.querySelector('#check-zip');
-    checkZipEl.onclick = () => {
-        //let zip = doc
-        alert(3)
-        let chooseProductEl = document.querySelector('#choose-product');
-        enterZipEl.style.display = 'none';
-        chooseProductEl.style.display = 'block';
+    let chooseProductEl = document.querySelector('#choose-product');
+    let availableSoonEl = document.querySelector('#available-soon');
+    let thanksForInfoEl = document.querySelector('#thanks-for-info');
+    let interestedButtonEl = document.querySelector('#interested');
+    let userZip;
+    checkZipEl.onclick = (event) => {
+        event.preventDefault();
+        userZip = document.querySelector('#zip').value;        
+        let zipValid = false;
+        fetch('https://adobeioruntime.net/api/v1/web/helix/helix-services/data-embed@v1/https://docs.google.com/spreadsheets/d/1F-lRwit5ZvIXCMaHpsPPWuWyyK4yMnJiLlHKbQdXd4Y/edit#gid=0')        
+        .then(response => response.json())
+        .then(data => {
+            data.map(({Zip}) => {
+                if(Zip == userZip) {
+                    zipValid = true;
+                }
+            })
+            if(zipValid) {                
+                enterZipEl.style.display = 'none';
+                chooseProductEl.style.display = 'block';
+            } else {
+                document.getElementById('Zip').value = userZip;
+                enterZipEl.style.display = 'none';
+                availableSoonEl.style.display = 'block';
+            }
+        });
+        
+        interestedButtonEl.onclick = (event) => {
+            event.preventDefault();
+            appendLog();
+        }   
         
     }
+
+    function appendLog() {                
+        let qs=`?`
+        document.querySelectorAll('#available-soon input').forEach((e) => {
+            qs += `${e.id}=${encodeURIComponent(e.value)}&`            
+        })
+        fetch(`https://script.google.com/macros/s/AKfycbyfnm0rPtqgMza-ttp-h6ZDutQA3fxAIK6Uc79Dgkw4aEGjifGl/exec${qs}`)
+            .then((response) => {
+                return response.json();
+            })
+            .then((data) => {
+                let {result} = data
+                if(result != 'success') {
+                    console.log(data);
+                }
+                availableSoonEl.style.display = 'none';
+                thanksForInfoEl.style.display = 'block';
+            });            
+        }
 </script>
 
 <style>
@@ -28,5 +85,13 @@
 
     #available-soon {
         display: none;
+    }
+
+    #thanks-for-info {
+        display: none;
+    }
+
+    #products a {
+
     }
 </style>
