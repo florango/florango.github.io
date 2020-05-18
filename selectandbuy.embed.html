@@ -1,20 +1,20 @@
 <div id="products">
     <div id="enter-zip">
+        <h3>We need to make sure you're within our Delivery Network</h3> Please enter the ZipCode of the intended Delivery Address so we can make sure we're able to get to you!
         <input id="zip" type="text" name="zip"/><a href="#" id="check-zip">Go!</a>
     </div>
     <div id="choose-product">
-        <ul>
-            <li><a href="https://subscriptions.zoho.com/subscribe/09dd718b7495e52928b10be395c1ecd26a2bba0f6b053217ad482bf477cf719e/weeklyhome">Every Week</a></li>
-            <li><a href="https://subscriptions.zoho.com/subscribe/09dd718b7495e52928b10be395c1ecd26a2bba0f6b053217ad482bf477cf719e/biweeklyhome">Every 2 Weeks</a></li>
-            <li><a href="https://subscriptions.zoho.com/subscribe/09dd718b7495e52928b10be395c1ecd26a2bba0f6b053217ad482bf477cf719e/monthlyhome">Once a Month</a></li>
-        </ul>
+        <a href="https://subscriptions.zoho.com/subscribe/09dd718b7495e52928b10be395c1ecd26a2bba0f6b053217ad482bf477cf719e/weeklyhome">Every Week</a>
+            <a href="https://subscriptions.zoho.com/subscribe/09dd718b7495e52928b10be395c1ecd26a2bba0f6b053217ad482bf477cf719e/biweeklyhome">Every 2 Weeks</a>
+            <a href="https://subscriptions.zoho.com/subscribe/09dd718b7495e52928b10be395c1ecd26a2bba0f6b053217ad482bf477cf719e/monthlyhome">Once a Month</a>
+        
 
     </div>
     <div id="available-soon">
         Name <input id="Name"/>
         Email <input id="Email"/>
         Phone <input id="Phone"/>
-        <input id="Zip" hidden="true"/>
+        <input id="Zip" type="hidden"/>
         <a href="#" id="interested">Submit</a>
     </div>
     <div id="thanks-for-info">
@@ -92,6 +92,21 @@
     }
 
     #products a {
+        display: inline-block;
+        border-radius: 10px;
+        background-color: #879988;
+        color: #EDE6D2;
+        text-decoration: none;
+        padding: 12px 20px 10px 20px;    
+        font-weight: 400;
+        outline-style: none;
+        outline-color: #879988;
+        outline-width: 4px;
+        text-transform: uppercase;        
+    }
 
+    #products input {
+        display: inline-block;
+        
     }
 </style>

@@ -18,6 +18,8 @@ header a:any-link {
 header img {
     height: 30px;
     fill: grey;
+    margin-top: 20px;
+    margin-left: 10px;
 }
 header > nav {
     margin: 0;

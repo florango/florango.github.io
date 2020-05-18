@@ -4,7 +4,7 @@
     <span class="fa fa-bars"></span>
   </a>
   
-  <img src="/assets/images/florango-logo.svg"/>
+  <img id="logo" src="/assets/images/florango-logo.svg"/>
   
   <nav id="main-menu" class="main-menu">
     <a href="#main-menu-toggle" class="menu-close">
