@@ -1,7 +1,7 @@
 <section id="products">
     <div id="enter-zip">
         <h3>We need to make sure you're within our Delivery Network</h3> Please enter the ZipCode of the intended Delivery Address so we can make sure we're able to get to you!
-        <input id="zip" type="text" name="zip"/><a href="#" id="check-zip">Go!</a>
+        <input id="zip" type="text" name="zip" placeholder="Zip"/><a href="#" id="check-zip">Go!</a>
     </div>
     <div id="choose-product">
         <h3>Yay! We deliver in your area!</h3> 
@@ -12,9 +12,9 @@
     </div>
     <div id="available-soon">
         <h3>Aw snap! We aren't in your area yet!</h3> But we're expanding our network as quickly as we can. Enter your info and we'll keep you posted on our progress and let you know when we're able to deliver to you.
-        Name <input id="Name"/>
-        Email <input id="Email"/>
-        Phone <input id="Phone"/>
+        <input id="Name" placeholder="Name"/>
+        <input id="Email" placeholder="Email"/>
+        <input id="Phone" placeholder="Phone"/>
         <input id="Zip" type="hidden"/>
         <a href="#" id="interested">Submit</a>
     </div>
@@ -101,22 +101,32 @@
     }
 
     #products a {
-        display: inline-block;
+        box-sizing: border-box;
+        display: block;
         border-radius: 10px;
         background-color: #879988;
         color: #EDE6D2;
         text-decoration: none;
-        padding: 12px 20px 10px 20px;    
+        padding: 10px;
         font-weight: 400;
         outline-style: none;
         outline-color: #879988;
         outline-width: 4px;
-        text-transform: uppercase;
-        margin: 10px;    
+        text-transform: uppercase;        
+        text-align: center;
+        margin: 10px 0;
     }
 
     #products input {
-        display: inline-block;
+        box-sizing: border-box;
+        display: block;
+        border-radius: 10px;
+        padding: 10px;
+        margin: 10px 0;   
+        text-align: center;     
+    }
+
+    #products #interested {
         
     }
 </style>
