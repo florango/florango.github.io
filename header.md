@@ -1,7 +1,7 @@
  
   
   <a href="#main-menu" class="menu-toggle">
-    <span class="fa fa-bars"></span>
+    <span>☰</span>
   </a>
   
   <img id="logo" src="/assets/images/florango-logo.svg"/>
