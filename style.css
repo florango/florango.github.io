@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css?family=Hammersmith+One&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Josefin+Sans&display=swap');
+
 /*
  * Copyright 2018 Adobe. All rights reserved.
  * This file is licensed to you under the Apache License, Version 2.0 (the "License");
@@ -319,8 +322,6 @@ button, input[type=button], input[type=submit], input[type=reset] {
   }
 }
 
-@import url('https://fonts.googleapis.com/css?family=Hammersmith+One&display=swap');
-@import url('https://fonts.googleapis.com/css?family=Josefin+Sans&display=swap');
 
 header {
     background-color: #879988;
