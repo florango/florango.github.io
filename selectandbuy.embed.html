@@ -37,7 +37,7 @@
         event.preventDefault();
         userZip = document.querySelector('#zip').value;        
         let zipValid = false;
-        fetch('https://adobeioruntime.net/api/v1/web/helix/helix-services/data-embed@v1/https://docs.google.com/spreadsheets/d/1F-lRwit5ZvIXCMaHpsPPWuWyyK4yMnJiLlHKbQdXd4Y/edit#gid=0')        
+        fetch('/ZipCode.json')
         .then(response => response.json())
         .then(data => {
             data.map(({Zip}) => {
