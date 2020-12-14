@@ -37,7 +37,7 @@
         event.preventDefault();
         userZip = document.querySelector('#zip').value;        
         let zipValid = false;
-        fetch('/ZipCode.json')
+        fetch('/ZipCodes.json')
         .then(response => response.json())
         .then(data => {
             data.map(({Zip}) => {
