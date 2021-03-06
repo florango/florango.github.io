@@ -40,7 +40,11 @@
             await fetch(prodURL, { cache: 'reload', mode: 'no-cors' });
             // eslint-disable-next-line no-console
             console.log(`redirecting to ${prodURL}`);
-            window.location.href = prodURL;
+            await fetch(prodURL, {
+              method: 'POST',
+              mode: 'no-cors'
+            })
+            window.location.href = prodURL;            
           } else {
             sk.notify('Successfully published');
           }
