@@ -13,5 +13,14 @@ img {
 }
 
 header {
+  height: 64px;
+}
+
+header .main-menu {
   display: none;
+
+}
+
+header img {
+  height: 48px;
 }
