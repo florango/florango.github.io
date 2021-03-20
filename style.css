@@ -54,7 +54,7 @@
 .header {
   position: absolute;
   height: 100vh;
-  width: 90vw;
+  width: 100%;
   top: 0;
   left: 0;
   display: flex;
@@ -186,6 +186,9 @@ header {
   box-sizing: border-box;
 }
 
+header>div {
+  width: 100%;
+}
 
 header img {
   height: 1em;
@@ -343,7 +346,7 @@ header img {
     margin-left: 10px;
 }
 header > nav {
-    margin: 0;
+    margin: 0;    
 }
 
 div.image {

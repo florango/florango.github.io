@@ -24,7 +24,7 @@ function decoratePage() {
           if ($h1) $divHeader.appendChild($h1);
           if ($p) $divHeader.appendChild($p);
         } else {
-          $div.classList.add(($div.firstElementChild && $div.firstElementChild.tagName=='IMG')?'image':'default');
+          $div.classList.add(($div.firstElementChild && $div.querySelector('img'))?'image':'default');
         }
       });
     }
