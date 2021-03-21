@@ -80,25 +80,28 @@ function decorateBlocks() {
 }
 
 function decoratePage() {
-  console.log(2)
   wrapSections('main > div');
   decorateFullWidthImage();
   const $img = document.querySelector('main img');
   if ($img) {
-    $img.addEventListener('load', () => {
+    if ($img.complete) {
       loadLater();
-    })
-    $img.addEventListener('error', () => {
-      loadLater();
-    })
+    } else {
+      $img.addEventListener('load', () => {
+        loadLater();
+      })
+      $img.addEventListener('error', () => {
+        loadLater();
+      })
+    }
   } else {
     loadLater();
-    console.log(1)
   }
 }
 
 function loadLater() {
   decorateBlocks();
+  loadCSS('/lazy-style.css');
 }
 
 decoratePage();

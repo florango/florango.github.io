@@ -1,0 +1,11 @@
+main .steps > div {
+    display: flex;    
+}
+
+main .steps p {
+    margin: 0;
+}
+
+main .steps > div > div {
+    padding: 16px;
+}

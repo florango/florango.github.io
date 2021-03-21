@@ -2,12 +2,15 @@ body {
   padding: 0;
   margin: 0;
   background-color: white;
-  font-family: "source-sans-pro", sans-serif;
+  font-family: "Hammersmith One", sans-serif;
   font-size: 1rem;
   font-weight: 300;
   line-height: 1.5;
 }
 
+h1, h2 {
+  font-family: "Josefin Sans";
+}
 
 header {
   background-color: #222;
@@ -83,7 +86,7 @@ main .full-image > div h1 {
   right: 0;
   text-align: center;
   color: white;
-  background-color: #00000080;
+  background-color: #00000040;
   padding: 12px;
 }
 
