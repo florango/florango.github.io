@@ -100,8 +100,9 @@ function decoratePage() {
 }
 
 function loadLater() {
+  document.body.classList.add('appear');
   decorateBlocks();
-  loadCSS('/lazy-style.css');
+  loadCSS('/lazy-style.css');  
 }
 
 decoratePage();
