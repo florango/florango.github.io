@@ -5,6 +5,9 @@ async function loadInclude($block) {
         const resp = await fetch(url.pathname + url.search);
         const text = await resp.text();        
         $block.innerHTML = text;
+        $block.querySelectorAll('script').forEach(($script) => {
+            eval($script.innerText);
+        })    
     }
 }
 
