@@ -1,13 +1,15 @@
-const {API, Auth} = import('/libs/amplifyLoader.js').then(async (mod) => {
-    //let stuff = await something(mod.API)
-    let stuff = await mod.Amplify.API.get("florango", "/zipcodes", {
-        'queryStringParameters': {
-            'zip': 90292
-        }
-    });
-    console.log(stuff)
-})
-.catch((ew) => console.error(ew));
+let { API, Auth } = await import('/libs/amplifyLoader.js')
+
+// const { API, Auth } = import('/libs/amplifyLoader.js').then(async (mod) => {
+
+//     // let stuff = await mod.Amplify.API.get("florango", "/zipcodes", {
+//     //     'queryStringParameters': {
+//     //         'zip': 90292
+//     //     }
+//     // });
+//     // console.log(stuff)
+// })
+//     .catch((ew) => console.error(ew));
 
 
 
@@ -17,8 +19,16 @@ async function loadInclude($block) {
     $block.innerHTML = text;
 }
 
-export default function decorate($block, blockName) {
+export default async function decorate($block, blockName) {
     loadInclude($block);
+
+        let stuff = await API.get("florango", "/zipcodes", {
+            'queryStringParameters': {
+                'zip': 90292
+            }
+        });
+        console.log(stuff)
+
 }
 
 
