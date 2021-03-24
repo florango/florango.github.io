@@ -1,18 +1,5 @@
 let { API, Auth } = await import('/libs/amplifyLoader.js')
 
-// const { API, Auth } = import('/libs/amplifyLoader.js').then(async (mod) => {
-
-//     // let stuff = await mod.Amplify.API.get("florango", "/zipcodes", {
-//     //     'queryStringParameters': {
-//     //         'zip': 90292
-//     //     }
-//     // });
-//     // console.log(stuff)
-// })
-//     .catch((ew) => console.error(ew));
-
-
-
 async function loadInclude($block) {
     const resp = await fetch('/blocks/signup/signup.html');
     const text = await resp.text();

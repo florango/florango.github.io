@@ -55,20 +55,12 @@ async function loadAmplifyAsScript() {
         ]
       }
     });
-
-    let stuff = await Amplify.API.get("florango", "/zipcodes", {
-      'queryStringParameters': {
-        'zip': 90232
-      }
-    });
-    console.log(stuff);
   }
   console.log('Amplify loaded')
 }
 
 async function load() {
   Amplify = await loadAmplifyAsModule();
-  console.log(Amplify)
   API = Amplify.API;
   Auth = Amplify.Auth;
 }
