@@ -1,13 +1,15 @@
-import('/scripts.js')
-    .then((mod) => {
-        console.log(mod)
-    })
-    .catch((err) => console.log('oof'));
+const {API, Auth} = import('/libs/amplifyLoader.js').then(async (mod) => {
+    //let stuff = await something(mod.API)
+    let stuff = await mod.Amplify.API.get("florango", "/zipcodes", {
+        'queryStringParameters': {
+            'zip': 90292
+        }
+    });
+    console.log(stuff)
+})
+.catch((ew) => console.error(ew));
 
 
-
-
-import { API } from '/scripts.js';
 
 async function loadInclude($block) {
     const resp = await fetch('/blocks/signup/signup.html');
@@ -15,19 +17,18 @@ async function loadInclude($block) {
     $block.innerHTML = text;
 }
 
-export default function decorate($block) {
+export default function decorate($block, blockName) {
     loadInclude($block);
-    console.log($block)
 }
 
 
-async function something() {
-    console.log(API);
+async function something(API) {
     let stuff = await API.get("florango", "/zipcodes", {
         'queryStringParameters': {
             'zip': 90292
         }
     });
+    return stuff;
 }
 
 function stuff() {
@@ -52,4 +53,3 @@ function stuff() {
         console.log('error signing up:', error);
     }
 }
-something();
