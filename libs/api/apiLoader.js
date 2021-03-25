@@ -1,7 +1,7 @@
 export let Amplify, Auth, API;
 
 async function loadAmplifyAsModule() {
-  Amplify = await import('/libs/aws-amplify.js')
+  Amplify = await import('/libs/api/aws-amplify.js')
   Amplify = window.aws_amplify.Amplify;
   Amplify.configure({
     Auth: {
@@ -57,6 +57,23 @@ async function loadAmplifyAsScript() {
     });
   }
   console.log('Amplify loaded')
+}
+
+export async function getDeliveryStatus(zip) {
+  return API.get("florango", "/status", {
+    'queryStringParameters': {
+      'zip': zip
+    }
+  });
+}
+
+export async function getOrderStatus(userId, weekId) {
+  return API.get("florango", "/orders", {
+    'queryStringParameters': {
+      userId,
+      weekId,
+    }
+  });
 }
 
 async function load() {

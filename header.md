@@ -1,10 +1,10 @@
 <img src="/assets/images/florango-logo.svg"/>
 
-<nav id="main-menu" class="hidden">  
+<nav id="main-menu" class="hidden">
   <ul>
     <li><a href="#subscriptions">Subscribe</a></li>
     <li><a href="#who-we-are">About</a></li>
-    <li><a href="mailto:hey@florango.com">Contact</a></li>      
+    <li><a href="mailto:hey@florango.com">Contact</a></li>
   </ul>
 </nav>
 

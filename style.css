@@ -29,9 +29,9 @@ header {
 }
 
 header > div {
-  display: flex;  
+  display: flex;
   justify-content: space-between;
-  align-items: center;  
+  align-items: center;
 }
 
 header .main-menu {
@@ -47,6 +47,11 @@ header img {
   display: none;
 }
 
+main {
+  margin-top: 75px;
+  min-height: calc(100vh - 190px);
+}
+
 main img {
   width: 100%;
   object-fit: cover;
@@ -59,7 +64,7 @@ main .section-wrapper {
 main .section-wrapper > div {
   max-width: 1200px;
   margin: auto;
-} 
+}
 
 main .full-image {
   margin: 0;
@@ -80,7 +85,7 @@ main .full-image > div img {
   bottom: 0;
   left: 0;
   right: 0;
-  object-fit: cover;  
+  object-fit: cover;
 }
 
 main .full-image > div h1 {

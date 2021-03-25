@@ -1,4 +1,4 @@
-let { API, Auth } = await import('/libs/amplifyLoader.js')
+let { API, Auth } = await import('/libs/api/apiLoader.js')
 
 async function loadInclude($block) {
     const resp = await fetch('/blocks/signup/signup.html');
