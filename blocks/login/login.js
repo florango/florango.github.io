@@ -1,5 +1,5 @@
-let { API, Auth } = await import('/libs/api/apiLoader.js');
-let overlay = await import('/libs/overlay/overlay.js');
+const { API, Auth } = await import('/libs/api/apiLoader.js');
+const overlay = await import('/libs/overlay/overlay.js');
 
 async function loadInclude($block, blockName) {
   const resp = await fetch(`/blocks/${blockName}/${blockName}.html`);

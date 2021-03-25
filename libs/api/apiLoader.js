@@ -76,6 +76,10 @@ export async function getOrderStatus(userId, weekId) {
   });
 }
 
+export async function getInventory() {
+  return API.get("florango", "/inventory");
+}
+
 async function load() {
   Amplify = await loadAmplifyAsModule();
   API = Amplify.API;
