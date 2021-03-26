@@ -29,8 +29,7 @@ export default async function decorate($block, blockName) {
       });
 
       sessionStorage.setItem('userInfo', JSON.stringify(profileData));
-      alert('about to redirect');
-      window.location.href = '/Shopper.html';
+      window.location.href = '/account/Shopper.html';
     } catch (ew) {
       let message = error.toString();
 

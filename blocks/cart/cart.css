@@ -5,14 +5,20 @@ main .cart-container {
 main .cart-container .summary {
   display: flex;
   color: rgb(221,215,198);
-  background-color: red;
+  background-color: #222;
   position: fixed;
   height: 65px;
   bottom: 0px;
   width: 100%;
-  padding: 16px;
+  padding-top: 16px;
+  padding-bottom: 16px;
   margin: 0;
   left:0;
   right:0;
   align-items: center;
+  justify-content: space-evenly;
+}
+
+main .cart-container .summary > p {
+  font-size: 3rem;
 }

@@ -33,6 +33,10 @@ function showContainer($container) {
   $container.style.display = 'block';
 }
 
+function hideContainer($container) {
+  $container.style.display = 'none';
+}
+
 let cart = {
   items: {},
   total: 0
@@ -69,8 +73,33 @@ function updateCart(productId, price, newQuantity) {
     cart.items[productId] = newQuantity;
   }
   cart.total = total;
+  document.querySelector('main .cart-container .summary > p.total-price').textContent = `$${total}`;
+
   console.log(cart);
 }
+
+async function handleSave() {
+  overlay.show();
+  try {
+    await API.post("florango", "/orders", {
+      body: {
+        cart: cart.items,
+        userId: profileData.id,
+        closingDate: status.dates.shoppingEndDate,
+        weekId
+      }
+    });
+  } catch (ew) {
+    console.error(ew);
+  }
+  let $cartContainer = document.querySelector('main .cart-container');
+  let $closedContainer = document.querySelector('main .closed-container');
+  hideContainer($cartContainer);
+  showContainer($closedContainer);
+  overlay.hide();
+}
+
+let profileData, weekId, status;
 
 export default async function decorate($block, blockName) {
   overlay.show();
@@ -78,13 +107,12 @@ export default async function decorate($block, blockName) {
     await loadInclude($block, blockName);
     let $main = document.querySelector('main');
     let profileJSON = sessionStorage.getItem('userInfo');
-    let profileData;
     if (profileJSON) {
       profileData = JSON.parse(profileJSON);
       let zip = profileData.zip;
-      let status = await getDeliveryStatus(zip);
+      status = await getDeliveryStatus(zip);
       if (status.dates.isShoppingTime) {
-        let weekId = status.dates.deliveryWeek + '-' + status.dates.deliveryYear;
+        weekId = status.dates.deliveryWeek + '-' + status.dates.deliveryYear;
         let orderStatus = await getOrderStatus(profileData.id, weekId);
         if (!orderStatus?.saved) {
           let $container = $main.querySelector('.cart-container');
@@ -139,6 +167,9 @@ export default async function decorate($block, blockName) {
             $cartItem.querySelector(`select option[value='${selectedQty}']`).setAttribute('selected', true);
             $cart.append($cartItem);
           })
+          $container.querySelector('a.save').addEventListener('click', e => {
+            handleSave();
+          });
           updateCart(FLORANGISTA.id, FLORANGISTA.price, 1);
           showContainer($container);
         } else {
