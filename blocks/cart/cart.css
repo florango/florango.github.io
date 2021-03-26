@@ -1,3 +1,15 @@
 main .cart-container {
   display:none;
 }
+
+main .cart-container .summary {
+  color: white;
+  background-color: black;
+  position: fixed;
+  bottom: 0px;
+  width: 100%;
+  padding: 16px;
+  margin: 0;
+  left:0;
+  right:0;
+}
