@@ -33,7 +33,17 @@ function showContainer($container) {
   $container.style.display = 'block';
 }
 
+let cart = { FLORANGISTA: 1 };
+
+function updateCart($quantity) {
+  let $product = $quantity.closest('.product');
+  let productId = $product?.id;
+  cart[productId] = $quantity.value;
+  console.log(cart);
+}
+
 export default async function decorate($block, blockName) {
+  overlay.show();
   try {
     await loadInclude($block, blockName);
     let $main = document.querySelector('main');
@@ -51,15 +61,16 @@ export default async function decorate($block, blockName) {
           let inventory = await getInventory();
           inventory = [
             {
-              "id": "FLORANGISTA",
-              "commonName": "This is the Florangista",
-              "description": "Your weekly delivery!",
-              "color": "Varied",
-              "unit": "BOX",
-              "inQty": "30",
-              "outQty": "0",
-              "availableQty": "30",
-              "price": "$25.00"
+              'id': 'FLORANGISTA',
+              'commonName': 'This is the Florangista',
+              'description': 'Your weekly delivery!',
+              'color': 'Varied',
+              'unit': 'BOX',
+              'inQty': '30',
+              'outQty': '0',
+              'availableQty': '30',
+              'price': '$25.00',
+              'selectedQty': 1,
             },
             ...inventory,
           ]
@@ -68,39 +79,47 @@ export default async function decorate($block, blockName) {
           let $products = '';
           inventory.map((product, i) => {
             let $flowerPic = $flowerPicsDoc.querySelector('#' + product.id + ' picture');
+            let $cartItem = document.createElement('div');
+            $cartItem.id = product.id;
+            $cartItem.classList.add('product');
             let cartItemMarkup = `
-              <div class="product">
-                <div class="picture">
-                  ${$flowerPic.outerHTML}
-                </div>
-                <div class="info">
-                  <h5>${product.commonName}</h5>
-                  <p class="description">
-                    ${product.description}
-                  </p>
-                </div>
-                <div class="price">
-                  ${product.price}/${product.unit}
-                </div>
-                <div>
-                  <select>
-                    <option value="0">0</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                    <option value="6">6</option>
-                    <option value="7">7</option>
-                    <option value="8">8</option>
-                    <option value="9">9</option>
-                    <option value="10">10</option>
-                  </select>
-                </div>
+              <div class="picture">
+                ${$flowerPic?.outerHTML}
+              </div>
+              <div class="info">
+                <p class="name">
+                  ${product.commonName}
+                </p>
+                <p class="description">
+                  ${product.description}
+                </p>
+              </div>
+              <div class="price">
+                ${product.price}/${product.unit}
+              </div>
+              <div>
+                <select class="quantity">
+                  <option value="0">0</option>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                  <option value="6">6</option>
+                  <option value="7">7</option>
+                  <option value="8">8</option>
+                  <option value="9">9</option>
+                  <option value="10">10</option>
+                </select>
               </div>`
-            $products += cartItemMarkup;
+            $cartItem.innerHTML = cartItemMarkup;
+            $cartItem.querySelector('.quantity').addEventListener('change', e => {
+              updateCart(e.target);
+            });
+            let selectedQty = (product.selectedQty) ? product.selectedQty : 0;
+            $cartItem.querySelector(`select option[value='${selectedQty}']`).setAttribute('selected', true);
+            $cart.append($cartItem);
           })
-          $cart.innerHTML = $products;
           showContainer($container);
         } else {
           let $container = $main.querySelector('.closed-container');
@@ -110,8 +129,9 @@ export default async function decorate($block, blockName) {
         let $container = $main.querySelector('.status-container');
         showContainer($container);
       }
+      overlay.hide();
     } else {
-      alert('Not logged in');
+      window.location.href = "/Login.html"
     }
   } catch (ew) {
     console.error(ew);

@@ -39,7 +39,6 @@ export default async function decorate($block, blockName) {
         message = error.message;
       }
       overlay.hide();
-      alert(message);
     }
   });
 }
