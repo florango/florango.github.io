@@ -22,7 +22,7 @@ async function loadAmplifyAsModule() {
       ]
     }
   });
-  console.log('Amplify loaded')
+  console.log('API loaded')
   return Amplify;
 }
 

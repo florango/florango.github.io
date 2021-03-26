@@ -99,6 +99,15 @@ async function handleSave() {
   overlay.hide();
 }
 
+async function handleSkip() {
+  if (confirm("Are you sure you want to skip this delivery?")) {
+    cart.items = {
+      SKIPPED: 0
+    }
+    handleSave();
+  }
+}
+
 let profileData, weekId, status;
 
 export default async function decorate($block, blockName) {
@@ -169,6 +178,9 @@ export default async function decorate($block, blockName) {
           })
           $container.querySelector('a.save').addEventListener('click', e => {
             handleSave();
+          });
+          $container.querySelector('a.skip').addEventListener('click', e => {
+            handleSkip();
           });
           updateCart(FLORANGISTA.id, FLORANGISTA.price, 1);
           showContainer($container);
