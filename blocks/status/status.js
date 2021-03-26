@@ -33,17 +33,42 @@ function showContainer($container) {
   $container.style.display = 'block';
 }
 
-let cart = { FLORANGISTA: 1 };
+let cart = {
+  items: {},
+  total: 0
+};
 
-function updateCart($quantity) {
-  let value = $quantity.value;
+const FLORANGISTA = {
+  'id': 'FLORANGISTA',
+  'commonName': 'This is the Florangista',
+  'description': 'Your weekly delivery!',
+  'color': 'Varied',
+  'unit': 'BOX',
+  'inQty': 30,
+  'outQty': 0,
+  'availableQty': 30,
+  'price': 25,
+  'selectedQty': 1,
+};
+
+function updateCartItem($quantity) {
+  let qty = $quantity.value;
+  let price = $quantity.getAttribute('price');
   let $product = $quantity.closest('.product');
   let productId = $product?.id;
-  if (value == 0) {
-    delete cart[productId];
-  } else {
-    cart[productId] = value;
+  updateCart(productId, price, qty);
+}
+
+function updateCart(productId, price, newQuantity) {
+  let total = cart.total;
+  let currentQuantity = cart.items[productId] || 0;
+  total -= currentQuantity * price;
+  delete cart.items[productId];
+  if (newQuantity != 0) {
+    total += newQuantity * price;
+    cart.items[productId] = newQuantity;
   }
+  cart.total = total;
   console.log(cart);
 }
 
@@ -65,18 +90,7 @@ export default async function decorate($block, blockName) {
           let $container = $main.querySelector('.cart-container');
           let inventory = await getInventory();
           inventory = [
-            {
-              'id': 'FLORANGISTA',
-              'commonName': 'This is the Florangista',
-              'description': 'Your weekly delivery!',
-              'color': 'Varied',
-              'unit': 'BOX',
-              'inQty': '30',
-              'outQty': '0',
-              'availableQty': '30',
-              'price': '$25.00',
-              'selectedQty': 1,
-            },
+            FLORANGISTA,
             ...inventory,
           ]
           let $flowerPicsDoc = await getFlowerPics();
@@ -100,10 +114,10 @@ export default async function decorate($block, blockName) {
                 </p>
               </div>
               <div class="price">
-                ${product.price}/${product.unit}
+                $${product.price}/${product.unit}
               </div>
               <div>
-                <select class="quantity">
+                <select class="quantity" price="${product.price}">
                   <option value="0">0</option>
                   <option value="1">1</option>
                   <option value="2">2</option>
@@ -119,12 +133,13 @@ export default async function decorate($block, blockName) {
               </div>`
             $cartItem.innerHTML = cartItemMarkup;
             $cartItem.querySelector('.quantity').addEventListener('change', e => {
-              updateCart(e.target);
+              updateCartItem(e.target);
             });
             let selectedQty = (product.selectedQty) ? product.selectedQty : 0;
             $cartItem.querySelector(`select option[value='${selectedQty}']`).setAttribute('selected', true);
             $cart.append($cartItem);
           })
+          updateCart(FLORANGISTA.id, FLORANGISTA.price, 1);
           showContainer($container);
         } else {
           let $container = $main.querySelector('.closed-container');
