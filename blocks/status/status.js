@@ -36,9 +36,14 @@ function showContainer($container) {
 let cart = { FLORANGISTA: 1 };
 
 function updateCart($quantity) {
+  let value = $quantity.value;
   let $product = $quantity.closest('.product');
   let productId = $product?.id;
-  cart[productId] = $quantity.value;
+  if (value == 0) {
+    delete cart[productId];
+  } else {
+    cart[productId] = value;
+  }
   console.log(cart);
 }
 
