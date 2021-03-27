@@ -1,11 +1,21 @@
-let {
+import  {
   API,
   Auth,
   getDeliveryStatus,
   getOrderStatus,
   getInventory,
-} = await import('/libs/api/apiLoader.js');
-const overlay = await import('/libs/overlay/overlay.js');
+  init as initAPILoader,
+} from '/libs/api/apiLoader.js';
+import {show as showOverlay, hide as hideOverlay} from '/libs/overlay/overlay.js';
+
+// let {
+//   API,
+//   Auth,
+//   getDeliveryStatus,
+//   getOrderStatus,
+//   getInventory,
+// } = await import('/libs/api/apiLoader.js');
+// const overlay = await import('/libs/overlay/overlay.js');
 
 async function loadInclude($block, blockName) {
   const resp = await fetch(`/blocks/${blockName}/${blockName}.html`);
@@ -79,7 +89,7 @@ function updateCart(productId, price, newQuantity) {
 }
 
 async function handleSave() {
-  overlay.show();
+  showOverlay();
   try {
     await API.post("florango", "/orders", {
       body: {
@@ -96,7 +106,7 @@ async function handleSave() {
   let $closedContainer = document.querySelector('main .closed-container');
   hideContainer($cartContainer);
   showContainer($closedContainer);
-  overlay.hide();
+  hideOverlay();
 }
 
 async function handleSkip() {
@@ -111,9 +121,20 @@ async function handleSkip() {
 let profileData, weekId, status;
 
 export default async function decorate($block, blockName) {
-  overlay.show();
+  showOverlay();
+
   try {
+    // let {
+    //   API,
+    //   Auth,
+    //   getDeliveryStatus,
+    //   getOrderStatus,
+    //   getInventory,
+    //   init,
+    // } = await import('/libs/api/apiLoader.js');
+    // await init();
     await loadInclude($block, blockName);
+    await initAPILoader();
     let $main = document.querySelector('main');
     let profileJSON = sessionStorage.getItem('userInfo');
     if (profileJSON) {
@@ -166,6 +187,8 @@ export default async function decorate($block, blockName) {
                   <option value="8">8</option>
                   <option value="9">9</option>
                   <option value="10">10</option>
+                  <option value="11">11</option>
+                  <option value="12">12</option>
                 </select>
               </div>`
             $cartItem.innerHTML = cartItemMarkup;
@@ -192,7 +215,7 @@ export default async function decorate($block, blockName) {
         let $container = $main.querySelector('.status-container');
         showContainer($container);
       }
-      overlay.hide();
+      hideOverlay();
     } else {
       window.location.href = "/Login.html"
     }

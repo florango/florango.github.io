@@ -80,10 +80,8 @@ export async function getInventory() {
   return API.get("florango", "/inventory");
 }
 
-async function load() {
+export async function init() {
   Amplify = await loadAmplifyAsModule();
   API = Amplify.API;
   Auth = Amplify.Auth;
 }
-
-await load();

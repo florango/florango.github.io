@@ -51,7 +51,7 @@ export function loadCSS(href) {
   }
 }
 
-function decorateBlocks() {
+async function decorateBlocks() {
   document.querySelectorAll('main div.section-wrapper > div > div').forEach(async ($block) => {
     const classes = Array.from($block.classList.values());
     let blockName = classes[0];
@@ -69,11 +69,17 @@ function decorateBlocks() {
       }
     });
     $block.classList.add('block');
-    import(`/blocks/${blockName}/${blockName}.js`)
-      .then((mod) => {
-        mod.default($block, blockName, document);
-      })
-      .catch((err) => console.log(`failed to load module for ${blockName}`, err));
+    try {
+      let mod = await import(`/blocks/${blockName}/${blockName}.js`);
+      await mod.default($block, blockName, document);
+    } catch (ew) {
+      console.error(ew)
+    }
+    // import(`/blocks/${blockName}/${blockName}.js`)
+    //   .then((mod) => {
+    //     mod.default($block, blockName, document);
+    //   })
+    //   .catch((err) => console.log(`failed to load module for ${blockName}`, err));
 
     loadCSS(`/blocks/${blockName}/${blockName}.css`);
   });

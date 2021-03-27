@@ -1,8 +1,16 @@
-let { loadCSS } = await import('/scripts.js')
-let $overlay = document.createElement('div');
-$overlay.classList.add('loading');
-document.querySelector('body').appendChild($overlay);
-await loadCSS('/libs/overlay/overlay.css');
+import { loadCSS } from '/scripts.js';
+//let { loadCSS } = await import('/scripts.js')
+
+let $overlay
+
+async function load() {
+  $overlay = document.createElement('div');
+  $overlay.classList.add('loading');
+  document.querySelector('body').appendChild($overlay);
+  await loadCSS('/libs/overlay/overlay.css');
+}
+
+load()
 
 export function visible(isVisible) {
   if(!isVisible) {
