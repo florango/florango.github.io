@@ -2,7 +2,7 @@ body {
   padding         : 0;
   margin          : 0;
   background-color: white;
-  font-family: "Josefin Sans", sans-serif;
+  font-family     : "Josefin Sans", sans-serif;
   font-size       : 1rem;
   font-weight     : 300;
   line-height     : 1.5;
@@ -15,7 +15,7 @@ body.appear {
 
 h1,
 h2 {
-  font-family     : "Hammersmith One", sans-serif;
+  font-family: "Hammersmith One", sans-serif;
 }
 
 header {
@@ -101,6 +101,10 @@ main .full-image>div h1 {
   padding         : 12px;
 }
 
+main .status-container {
+  display: none;
+}
+
 footer {
   background-color: #222;
   color           : rgb(221, 215, 198);
@@ -126,17 +130,17 @@ footer img {
 }
 
 a.button {
-  display        : inline-block;
-  padding        : 0.35em 1.2em;
-  border         : 0.1em solid #FFFFFF;
-  margin         : 0 0.3em 0.3em 0;
-  border-radius  : 0.12em;
-  box-sizing     : border-box;
-  text-decoration: none;
-  font-weight    : 300;
-  color          : black;
-  text-align     : center;
-  transition     : all 0.2s;
+  display         : inline-block;
+  padding         : 0.35em 1.2em;
+  border          : 0.1em solid #FFFFFF;
+  margin          : 0 0.3em 0.3em 0;
+  border-radius   : 0.12em;
+  box-sizing      : border-box;
+  text-decoration : none;
+  font-weight     : 300;
+  color           : black;
+  text-align      : center;
+  transition      : all 0.2s;
   background-color: #ddd7c6;
 }
 
@@ -144,5 +148,29 @@ a.button {
   a.button1 {
     display: block;
     margin : 0.4em auto;
+  }
+}
+
+input {
+  font-size: 16 px;
+}
+
+input:focus {
+  font-size: 16px;
+}
+
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  select,
+  textarea,
+  input {
+    font-size: 16px;
+  }
+}
+
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  select:focus,
+  textarea:focus,
+  input:focus {
+    font-size: 16px;
   }
 }

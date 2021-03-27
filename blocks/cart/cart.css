@@ -19,6 +19,17 @@ main .cart-container .summary {
   justify-content: space-evenly;
 }
 
-main .cart-container .summary > p {
+main .cart-container .summary .prices {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+main .cart-container .summary .total-price {
+  line-height: 1;
   font-size: 3rem;
+}
+main .cart-container .summary .shipping-price {
+  font-size: 1rem;
 }

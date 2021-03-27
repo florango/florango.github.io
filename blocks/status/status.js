@@ -83,7 +83,9 @@ function updateCart(productId, price, newQuantity) {
     cart.items[productId] = newQuantity;
   }
   cart.total = total;
-  document.querySelector('main .cart-container .summary > p.total-price').textContent = `$${total}`;
+  let shipping = (total >= 50) ? 'FREE' : '+$5';
+  document.querySelector('main .cart-container .summary .total-price').textContent = `$${total}`;
+  document.querySelector('main .cart-container .summary .shipping-price').textContent = `${shipping} delivery`;
 
   console.log(cart);
 }
