@@ -85,3 +85,14 @@ export async function init() {
   API = Amplify.API;
   Auth = Amplify.Auth;
 }
+
+export const session = {
+  set: function (name, value) {
+    return sessionStorage.setItem(name, (value) ? JSON.stringify(value) : null);
+  },
+
+  get: function (name) {
+    let value = sessionStorage.getItem(name);
+    return (value) ? JSON.parse(value) : null;
+  },
+}

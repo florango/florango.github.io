@@ -1,10 +1,9 @@
 import {
   API,
   Auth,
-  init as initAPILoader, } from '/libs/api/apiLoader.js';
+  init as initAPILoader,
+} from '/libs/api/apiLoader.js';
 import { show as showOverlay, hide as hideOverlay } from '/libs/overlay/overlay.js';
-// const { API, Auth } = await import('/libs/api/apiLoader.js');
-// const overlay = await import('/libs/overlay/overlay.js');
 
 async function loadInclude($block, blockName) {
   const resp = await fetch(`/blocks/${blockName}/${blockName}.html`);
@@ -35,7 +34,9 @@ export default async function decorate($block, blockName) {
     });
 
     sessionStorage.setItem('userInfo', JSON.stringify(profileData));
-    window.location.href = '/account/Shopper.html';
+    window.location.href = '/account/Shopper';
 
   });
+  const $main = document.querySelector('main');
+  $main?.classList.add('appear');
 }

@@ -125,16 +125,7 @@ let profileData, weekId, status;
 export default async function decorate($block, blockName) {
   showOverlay();
 
-  try {
-    // let {
-    //   API,
-    //   Auth,
-    //   getDeliveryStatus,
-    //   getOrderStatus,
-    //   getInventory,
-    //   init,
-    // } = await import('/libs/api/apiLoader.js');
-    // await init();
+  try {    
     await loadInclude($block, blockName);
     await initAPILoader();
     let $main = document.querySelector('main');
@@ -219,7 +210,7 @@ export default async function decorate($block, blockName) {
       }
       hideOverlay();
     } else {
-      window.location.href = "/Login.html"
+      window.location.href = "/Login"
     }
   } catch (ew) {
     console.error(ew);

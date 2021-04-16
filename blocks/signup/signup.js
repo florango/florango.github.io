@@ -1,32 +1,28 @@
-let { API, Auth } = await import('/libs/api/apiLoader.js')
+import {
+    API,
+    Auth,
+    session,
+    init as initAPILoader,
+} from '/libs/api/apiLoader.js';
 
-async function loadInclude($block) {
-    const resp = await fetch('/blocks/signup/signup.html');
+async function loadInclude($block, blockName) {
+    const resp = await fetch(`/blocks/${blockName}/${blockName}.html`);
     const text = await resp.text();
     $block.innerHTML = text;
 }
 
 export default async function decorate($block, blockName) {
-    loadInclude($block);
-
-        let stuff = await API.get("florango", "/zipcodes", {
-            'queryStringParameters': {
-                'zip': 90292
-            }
-        });
-        console.log(stuff)
-
+    loadInclude($block, blockName);
+    await initAPILoader();
+    if (!session.get('status')) {
+        window.location.href = '/account/CheckZipCode';
+    }
 }
 
+const $main = document.querySelector('main');
+$main?.classList.add('appear');
 
-async function something(API) {
-    let stuff = await API.get("florango", "/zipcodes", {
-        'queryStringParameters': {
-            'zip': 90292
-        }
-    });
-    return stuff;
-}
+
 
 function stuff() {
     try {
