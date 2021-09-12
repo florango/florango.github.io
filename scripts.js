@@ -116,10 +116,17 @@ async function decorateBlocksOld() {
   });  
 }
 
+async function loadHeader() {
+  const resp = await fetch('/header.html');
+  const html = await resp.text();
+  document.querySelector('header').innerHTML = html;
+}
+
 async function decoratePage() {
   wrapSections('main > div');
+  loadHeader();
   decorateFullWidthImage();
-  decorateBlocks();
+  decorateBlocks();  
   const $img = document.querySelector('main img');
   if ($img) {
     if ($img.complete) {
