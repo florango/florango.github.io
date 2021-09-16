@@ -25,7 +25,8 @@ async function loadInclude($block, blockName) {
     .addCompany('Florango')
     .addJobtitle('Chief Florangista')
     .addEmail('Karol@Florango.com')
-    .addPhoneNumber(4242727091, 'WORK')
+    .addPhoneNumber(4242727091, 'STORE')
+    .addPhoneNumber(3053350108, 'MOBILE')
     .addAddress('', '', '74275 Highway 111', 'Palm Desert', 'CA', '92260', 'USA')
     .addURL('http://www.Florango.com')
   const cardString = vCard.toString();
@@ -45,6 +46,7 @@ async function loadInclude($block, blockName) {
     })
 
   $contactInfo.appendChild($link)
+  $link.click();
 }
 
 export default async function decorate($block, blockName) {
