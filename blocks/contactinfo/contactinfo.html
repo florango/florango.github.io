@@ -1,0 +1,23 @@
+JOSHWASHERE
+<script type="text/javascript">
+  // From JSON
+  var johnSmith = {
+      "version": "4.0",
+      "n": "SMITH;John;;",
+      "fn": "John Smith",
+      "nickname":"js",
+      "title": "Missing man too",
+      "tel": [
+          {"value": "555-555-555", "type": "cell"}
+      ],
+      "email": [
+          { "value": "john.smith@work.com", "type": "work" },
+          { "value": "john.smith@home.com", "type": "home" }
+      ]
+  }
+
+  var link = vCard.export(johnSmith, "John Smith", false) // use parameter true to force download
+  document.body.appendChild(link)
+</script>
+
+<script type="text/javascript" src="/libs/vcard.js"></script>
