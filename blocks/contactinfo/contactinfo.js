@@ -6,7 +6,7 @@ async function loadInclude($block, blockName) {
   const resp = await fetch(`/blocks/${blockName}/${blockName}.html`);
   const text = await resp.text();
   $block.innerHTML = text;
-  console.log('loadInclude')
+
 
   // Define a new vCard
   const vCard = new VCard()
@@ -18,10 +18,10 @@ async function loadInclude($block, blockName) {
   const prefix = ''
   const suffix = ''
 
+
+
   vCard
-    // Add personal data
     .addName(lastname, firstname, additional, prefix, suffix)
-    // Add work data
     .addCompany('Florango')
     .addJobtitle('Chief Florangista')
     .addEmail('Karol@Florango.com')
@@ -29,6 +29,7 @@ async function loadInclude($block, blockName) {
     .addPhoneNumber(3053350108, 'MOBILE')
     .addAddress('', '', '74275 Highway 111', 'Palm Desert', 'CA', '92260', 'USA')
     .addURL('http://www.Florango.com')
+    .addPhoto('/assets/images/FlorRider.png', 'image/png')
   const cardString = vCard.toString();
   console.log(cardString)
 
@@ -46,7 +47,7 @@ async function loadInclude($block, blockName) {
     })
 
   $contactInfo.appendChild($link)
-  $link.click();
+  //$link.click();
 }
 
 export default async function decorate($block, blockName) {
