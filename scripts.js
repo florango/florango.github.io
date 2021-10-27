@@ -16,7 +16,7 @@ export async function extractData($block) {
   return data;
 }
 
-export async function hydrateBlock($block, $include, data, keepParent) {
+export async function hydrateInclude($block, $include, data, keepParent) {
   $block.innerHTML = $include;
   const $anys = $block.querySelectorAll('any')
   for (let key in data) {
