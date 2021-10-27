@@ -1,23 +1,36 @@
 export async function loadInclude($block, blockName) {
   const resp = await fetch(`/blocks/${blockName}/${blockName}.html`);
   const text = await resp.text();
-  $block.innerHTML = text;
+  //$block.innerHTML = text;
+  return text;
 }
 
-export async function hydrateBlock($block, blockName) {
+export async function extractData($block) {
   const $rows = Array.from($block.children);
-    const values = {};
-    $rows.forEach(($row) => {
-        const $key = $row.firstChild
-        const $value = $key.nextSibling
-        values[$key.innerHTML] = $value.innerHTML
-    });    
-    await loadInclude($block, blockName);
-    const $anys = $block.querySelectorAll('any')    
-    for (let key in values) {
-        const $any = $block.querySelector('any[name="' + key + '"')
-        $any.innerHTML = values[key];
-    }  
+  const data = {};
+  $rows.forEach(($row) => {
+    const $key = $row.firstChild
+    const $value = $key.nextSibling
+    data[$key.innerHTML] = $value.innerHTML
+  });
+  return data;
+}
+
+export async function hydrateBlock($block, $include, data, keepParent) {
+  $block.innerHTML = $include;
+  const $anys = $block.querySelectorAll('any')
+  for (let key in data) {
+    const $any = $block.querySelector('any[key="' + key + '"')
+    $any.innerHTML = data[key];
+    if(!keepParent)
+      $any.replaceWith($any.firstChild)
+  }
+}
+
+export async function decorateBlock($block, blockName) {
+  let data = await extractData($block)
+  const $include = await loadInclude($block, blockName)
+  await hydrateBlock($block, $include, data)
 }
 
 export function createTag(name, attrs) {
@@ -57,7 +70,7 @@ function decorateFullWidthImage() {
  * Loads a CSS file.
  * @param {string} href The path to the CSS file
  */
- export function loadCSS(href) {
+export function loadCSS(href) {
   if (!document.querySelector(`head > link[href="${href}"]`)) {
     const link = document.createElement('link');
     link.setAttribute('rel', 'stylesheet');

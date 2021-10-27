@@ -1,11 +1,12 @@
 .hero-container {
-  .hero {
-    .full-image {
+  .hero {    
       img {
         background-color: yellow;
         width     : 100%;
         object-fit: cover;
-      }
-    }
+      }    
+  }
+  .belt {
+    background-color: black;
   }
 }

@@ -1,6 +1,9 @@
-.hero-container .hero .full-image img {
+.hero-container .hero img {
   background-color: yellow;
   width: 100%;
   -o-object-fit: cover;
      object-fit: cover;
+}
+.hero-container .belt {
+  background-color: black;
 }/*# sourceMappingURL=hero.css.map */
