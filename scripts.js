@@ -1,3 +1,25 @@
+export async function loadInclude($block, blockName) {
+  const resp = await fetch(`/blocks/${blockName}/${blockName}.html`);
+  const text = await resp.text();
+  $block.innerHTML = text;
+}
+
+export async function hydrateBlock($block, blockName) {
+  const $rows = Array.from($block.children);
+    const values = {};
+    $rows.forEach(($row) => {
+        const $key = $row.firstChild
+        const $value = $key.nextSibling
+        values[$key.innerHTML] = $value.innerHTML
+    });    
+    await loadInclude($block, blockName);
+    const $anys = $block.querySelectorAll('any')    
+    for (let key in values) {
+        const $any = $block.querySelector('any[name="' + key + '"')
+        $any.innerHTML = values[key];
+    }  
+}
+
 export function createTag(name, attrs) {
   const el = document.createElement(name);
   if (typeof attrs === 'object') {
@@ -115,7 +137,7 @@ async function decoratePage() {
 function loadLater() {
   document.body.classList.add('appear');
   loadBlocks();
-  loadCSS('/lazy-style.css');
+  loadCSS('/styles/lazy-styles.css');
 }
 
 decoratePage();
