@@ -1,7 +1,6 @@
 export async function loadInclude($block, blockName) {
   const resp = await fetch(`/blocks/${blockName}/${blockName}.html`);
   const text = await resp.text();
-  //$block.innerHTML = text;
   return text;
 }
 
@@ -16,14 +15,17 @@ export async function extractData($block) {
   return data;
 }
 
-export async function hydrateInclude($block, $include, data, keepParent) {
+export async function hydrateInclude($block, $include, data, keepWrapper) {
   $block.innerHTML = $include;
   const $anys = $block.querySelectorAll('any')
   for (let key in data) {
     const $any = $block.querySelector('any[key="' + key + '"')
-    $any.innerHTML = data[key];
-    if(!keepParent)
-      $any.replaceWith($any.firstChild)
+    const value = data[key]
+    if ($any && value) {
+      $any.innerHTML = value;
+      if (!keepWrapper)
+        $any.replaceWith($any.firstChild)
+    }
   }
 }
 
@@ -46,7 +48,6 @@ export function createTag(name, attrs) {
 function wrapSections(element) {
   document.querySelectorAll(element).forEach(($div) => {
     if ($div.childNodes.length === 0 || !$div.firstElementChild) {
-      // remove empty sections
       $div.remove();
     } else if (!$div.id) {
       const $wrapper = createTag('div', { class: 'section-wrapper' });
