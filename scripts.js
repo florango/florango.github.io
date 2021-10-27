@@ -1,37 +1,60 @@
-export async function loadInclude($block, blockName) {
+/**
+ * Fetches the Include markup from the Block
+ * @param {*} $block The Block provided from the Document
+ * @param {string} blockName The name of the Block provided from the Document
+ */
+export async function fetchInclude($block, blockName) {
   const resp = await fetch(`/blocks/${blockName}/${blockName}.html`);
   const text = await resp.text();
   return text;
 }
 
+/**
+ * Extracts the Names/Values from the Block on the Document
+ * @param {*} $block The Block provided from the Document
+ */
 export async function extractData($block) {
   const $rows = Array.from($block.children);
   const data = {};
   $rows.forEach(($row) => {
-    const $key = $row.firstChild
-    const $value = $key.nextSibling
-    data[$key.innerHTML] = $value.innerHTML
+    const $key = $row.firstChild;
+    const $value = $key.nextSibling;
+    data[$key.innerHTML] = $value.innerHTML;
   });
   return data;
 }
 
+/**
+ * Merges the Block, Include and Data into a displayable Component
+ * @param {*} $block The Block provided from the Document
+ * @param {string} $include The markup from the Block HTML file
+ * @param {Object} data The Names/Values to be applied  
+ * @param {Boolean} keepWrapper Keep the Wrapper Tag (false by default)
+ */
 export async function hydrateInclude($block, $include, data, keepWrapper) {
   $block.innerHTML = $include;  
   for (let key in data) {
-    const $any = $block.querySelector('any[key="' + key + '"')
-    const value = data[key]
+    const $any = $block.querySelector('any[key="' + key + '"');
+    const value = data[key];
     if ($any && value) {
       $any.innerHTML = value;
       if (!keepWrapper)
-        $any.replaceWith($any.firstChild)
+        $any.replaceWith($any.firstChild);
     }
   }
+  return $block;
 }
 
+/**
+ * Creates a displayable Component from a Block in a single operation
+ * @param {*} $block The Block provided from the Document
+ * @param {string} blockName The name of the Block provided from the Document
+ */
 export async function dressBlock($block, blockName) {
-  let data = await extractData($block)
-  const $include = await loadInclude($block, blockName)
-  await hydrateInclude($block, $include, data)
+  let data = await extractData($block);
+  const $include = await fetchInclude($block, blockName);
+  await hydrateInclude($block, $include, data);
+  return $block;
 }
 
 export function createTag(name, attrs) {
