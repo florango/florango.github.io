@@ -16,8 +16,7 @@ export async function extractData($block) {
 }
 
 export async function hydrateInclude($block, $include, data, keepWrapper) {
-  $block.innerHTML = $include;
-  const $anys = $block.querySelectorAll('any')
+  $block.innerHTML = $include;  
   for (let key in data) {
     const $any = $block.querySelector('any[key="' + key + '"')
     const value = data[key]
@@ -29,10 +28,10 @@ export async function hydrateInclude($block, $include, data, keepWrapper) {
   }
 }
 
-export async function decorateBlock($block, blockName) {
+export async function dressBlock($block, blockName) {
   let data = await extractData($block)
   const $include = await loadInclude($block, blockName)
-  await hydrateBlock($block, $include, data)
+  await hydrateInclude($block, $include, data)
 }
 
 export function createTag(name, attrs) {
