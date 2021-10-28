@@ -1,1 +1,0 @@
-{"version":3,"sources":["styles.scss"],"names":[],"mappings":"AAAA,IACE,MAAO","file":"styles.min.css","sourcesContent":["@charset 'utf-8';\n\n\ndiv {\n    color: red;\n}"]}

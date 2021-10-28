@@ -32,7 +32,7 @@ export async function extractData($block) {
  * @param {Boolean} keepWrapper Keep the Wrapper Tag (false by default)
  */
 export async function hydrateInclude($block, $include, data, keepWrapper) {
-  $block.innerHTML = $include;  
+  $block.innerHTML = $include;
   for (let key in data) {
     const $any = $block.querySelector('any[key="' + key + '"');
     const value = data[key];
@@ -143,8 +143,10 @@ function decorateBlocks() {
   });
 }
 
-function loadHeader() {
-
+async function loadHeader() {
+  const resp = await fetch('/header.html');
+  const html = await resp.text();
+  document.querySelector('header').innerHTML = html;
 }
 
 async function decoratePage() {

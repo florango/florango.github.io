@@ -1,9 +1,30 @@
+.hero-container {
+  margin: 0;
+}
+.hero-container .hero {
+  position: relative;
+  display: flexbox;
+  width: 100%;
+}
 .hero-container .hero img {
-  background-color: yellow;
   width: 100%;
   -o-object-fit: cover;
      object-fit: cover;
 }
-.hero-container .belt {
-  background-color: black;
+.hero-container .hero .belt {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-10%);
+  left: 0;
+  right: 0;
+  text-align: center;
+  color: white;
+  background-color: #00000040;
+  padding: 12px;
+}
+
+@media (max-width: 500px) {
+  .hero-container .hero .belt {
+    top: 20%;
+  }
 }/*# sourceMappingURL=hero.css.map */

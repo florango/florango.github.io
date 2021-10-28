@@ -1,3 +1,55 @@
 @charset 'utf-8';
 
-@import "./styles/reset"
+@import url("https://fonts.googleapis.com/css?family=Hammersmith+One&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Josefin+Sans&display=swap");
+
+@import "./styles/reset";
+
+body {
+    padding: 0;
+    margin: 0;
+    background-color: white;
+    font-family: "Josefin Sans", sans-serif;
+    font-size: 1rem;
+    font-weight: 300;
+    line-height: 1.5;
+}
+
+h1,
+h2 {
+    font-family: "Hammersmith One", sans-serif;
+}
+
+header {
+    background-color: #879988;
+    padding: 16px;
+    color: rgb(221, 215, 198);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+    .main-menu {
+        display: none;
+    }
+    img {
+        height: 24px;
+    }
+    > div {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .hamburger {
+        color: black;
+    }
+}
+
+.hidden {
+    display: none;
+}
+
+main {
+    margin-top: 56px;
+    min-height: calc(100vh - 197px);
+}

@@ -5,7 +5,7 @@ import {
     dressBlock
 } from '/scripts.js';
 
-export default async function decorate($block, blockName, document) {    
+export default async function process($block, blockName, document) {    
     // const data = await extractData($block)    
     // const $include = await fetchInclude($block, blockName)    
     // await hydrateInclude($block, $include, data)
