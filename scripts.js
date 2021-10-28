@@ -16,11 +16,16 @@ export async function fetchInclude($block, blockName) {
 export async function extractData($block) {
   const $rows = Array.from($block.children);
   const data = {};
+  let i = 0;
   $rows.forEach(($row) => {
-    const $key = $row.firstChild;
+    let $key = $row.firstChild;
     const $value = $key.nextSibling;
-    data[$key.innerHTML] = $value.innerHTML;
+    if ($value) // if there's no sibling, it's unkeyed
+      data[$key.innerHTML] = $value.innerHTML;
+    else
+      data[i++] = $key;
   });
+  console.log(data);
   return data;
 }
 

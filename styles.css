@@ -326,7 +326,15 @@ body {
 
 h1,
 h2 {
+  margin: 16px;
   font-family: "Hammersmith One", sans-serif;
+}
+
+p {
+  padding: 16px;
+}
+p img {
+  width: 100%;
 }
 
 header {
@@ -361,4 +369,35 @@ header .hamburger {
 main {
   margin-top: 56px;
   min-height: calc(100vh - 197px);
+}
+main p img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+main p a {
+  color: green;
+}
+main p a:only-child {
+  color: red;
+}
+main .full-width-image img {
+  width: 100%;
+}
+main .button {
+  display: flex;
+  justify-content: center;
+}
+main .button a {
+  padding: 0.35em 1.2em;
+  border: 0.1em solid #ffffff;
+  margin: 0 0.3em 0.3em 0;
+  border-radius: 0.12em;
+  color: black;
+  box-sizing: border-box;
+  text-decoration: none;
+  font-weight: 300;
+  text-align: center;
+  transition: all 0.2s;
+  background-color: #ddd7c6;
 }/*# sourceMappingURL=styles.css.map */
