@@ -4,28 +4,27 @@ export async function applyTemplate($block, blockName, modifierFunc) {
   const $template = document.createElement('div');
   $template.innerHTML = markup;
   const $anys = Array.from($template.querySelectorAll('any[q]'));  
-  let data = [];
+  let content = [];
   $anys.forEach(($any) => {
     const q = $any.getAttribute('q');
     let name = $any.getAttribute('name') || q;    
     if (q) {
-      const $data = $block.querySelector(q);
-      const mm = $data.outerHTML;
+      const $content = $block.querySelector(q);      
       let record = {
-        name, $any, $data,
+        name, $any, $content,
       };
-      data = [...data, record];
+      content = [...content, record];
     }
   });
   if (modifierFunc) {
-    modifierFunc(data);
+    modifierFunc(content);
   }
-  for (let i in data) {
-    const record = data[i];
+  for (let i in content) {
+    const record = content[i];
     const name = record['name'];
     const $any = record['$any'];
-    const $data = record['$data'];
-    $any.innerHTML = $data.outerHTML;
+    const $content = record['$content'];
+    $any.innerHTML = $content.outerHTML;
     $any.replaceWith($any.firstChild);
   }
   $block.innerHTML = $template.innerHTML; 
