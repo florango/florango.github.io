@@ -22,8 +22,7 @@
   background-color: #00000040;
   padding: 12px;
 }
-
-@media (max-width: 500px) {
+@media screen and (max-width: 599px) {
   .hero-container .hero .belt {
     top: 20%;
   }

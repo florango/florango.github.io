@@ -1,65 +1,34 @@
-/**
- * Fetches the Include markup from the Block
- * @param {*} $block The Block provided from the Document
- * @param {string} blockName The name of the Block provided from the Document
- */
-export async function fetchInclude($block, blockName) {
+export async function applyTemplate($block, blockName, modifierFunc) {
   const resp = await fetch(`/blocks/${blockName}/${blockName}.html`);
-  const text = await resp.text();
-  return text;
-}
-
-/**
- * Extracts the Names/Values from the Block on the Document
- * @param {*} $block The Block provided from the Document
- */
-export async function extractData($block) {
-  const $rows = Array.from($block.children);
-  const data = {};
-  let i = 0;
-  $rows.forEach(($row) => {
-    let $key = $row.firstChild;
-    const $value = $key.nextSibling;
-    if ($value) // if there's no sibling, it's unkeyed
-      data[$key.innerHTML] = $value.innerHTML;
-    else
-      data[i++] = $key;
-  });
-  console.log(data);
-  return data;
-}
-
-/**
- * Merges the Block, Include and Data into a displayable Component
- * @param {*} $block The Block provided from the Document
- * @param {string} $include The markup from the Block HTML file
- * @param {Object} data The Names/Values to be applied  
- * @param {Boolean} keepWrapper Keep the Wrapper Tag (false by default)
- */
-export async function hydrateInclude($block, $include, data, keepWrapper) {
-  $block.innerHTML = $include;
-  for (let key in data) {
-    const $any = $block.querySelector('any[key="' + key + '"');
-    const value = data[key];
-    if ($any && value) {
-      $any.innerHTML = value;
-      if (!keepWrapper)
-        $any.replaceWith($any.firstChild);
+  const markup = await resp?.text();
+  const $template = document.createElement('div');
+  $template.innerHTML = markup;
+  const $anys = Array.from($template.querySelectorAll('any[q]'));  
+  let data = [];
+  $anys.forEach(($any) => {
+    const q = $any.getAttribute('q');
+    let name = $any.getAttribute('name') || q;    
+    if (q) {
+      const $data = $block.querySelector(q);
+      const mm = $data.outerHTML;
+      let record = {
+        name, $any, $data,
+      };
+      data = [...data, record];
     }
+  });
+  if (modifierFunc) {
+    modifierFunc(data);
   }
-  return $block;
-}
-
-/**
- * Creates a displayable Component from a Block in a single operation
- * @param {*} $block The Block provided from the Document
- * @param {string} blockName The name of the Block provided from the Document
- */
-export async function dressBlock($block, blockName) {
-  let data = await extractData($block);
-  const $include = await fetchInclude($block, blockName);
-  await hydrateInclude($block, $include, data);
-  return $block;
+  for (let i in data) {
+    const record = data[i];
+    const name = record['name'];
+    const $any = record['$any'];
+    const $data = record['$data'];
+    $any.innerHTML = $data.outerHTML;
+    $any.replaceWith($any.firstChild);
+  }
+  $block.innerHTML = $template.innerHTML; 
 }
 
 export function createTag(name, attrs) {
@@ -77,7 +46,12 @@ function wrapSections(element) {
     if ($div.childNodes.length === 0 || !$div.firstElementChild) {
       $div.remove();
     } else if (!$div.id) {
-      const $wrapper = createTag('div', { class: 'section-wrapper' });
+      const $firstTag = $div.firstElementChild;
+      let titleClass = ''
+      if ($firstTag && $firstTag.id) {
+        titleClass = $firstTag.id + '-container';
+      }
+      const $wrapper = createTag('div', { class: 'section-wrapper ' + titleClass });
       $div.parentNode.appendChild($wrapper);
       $wrapper.appendChild($div);
     }

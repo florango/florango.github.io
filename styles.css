@@ -333,9 +333,6 @@ h2 {
 p {
   padding: 16px;
 }
-p img {
-  width: 100%;
-}
 
 header {
   background-color: #879988;
@@ -375,6 +372,11 @@ main p img {
   margin-left: auto;
   margin-right: auto;
 }
+@media screen and (max-width: 599px) {
+  main p img {
+    width: 100%;
+  }
+}
 main p a {
   color: green;
 }
@@ -400,4 +402,39 @@ main .button a {
   text-align: center;
   transition: all 0.2s;
   background-color: #ddd7c6;
+}
+main .icon-and-text {
+  display: flexbox;
+  justify-content: flex-start;
+}
+main .icon-and-text div img {
+  width: 25%;
+}
+@media screen and (max-width: 599px) {
+  main .icon-and-text > div {
+    display: flexbox;
+    flex-direction: column;
+    justify-content: center;
+  }
+  main .icon-and-text > div div {
+    display: flexbox;
+    text-align: center;
+  }
+  main .icon-and-text > div div img {
+    width: 15%;
+  }
+}
+main .how-it-works-container {
+  display: flexbox;
+  align-items: flex-end;
+  justify-content: space-evenly;
+  background-color: rosybrown;
+}
+@media screen and (min-width: 600px) {
+  main .how-it-works-container h1 {
+    align-self: flex-start;
+  }
+  main .how-it-works-container .icon-and-text {
+    align-self: flex-end;
+  }
 }/*# sourceMappingURL=styles.css.map */

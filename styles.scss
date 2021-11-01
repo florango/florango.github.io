@@ -3,6 +3,7 @@
 @import url("https://fonts.googleapis.com/css?family=Hammersmith+One&display=swap");
 @import url("https://fonts.googleapis.com/css?family=Josefin+Sans&display=swap");
 
+@import './styles/media-queries.scss';
 @import "./styles/reset";
 
 body {
@@ -21,11 +22,8 @@ h2 {
     font-family: "Hammersmith One", sans-serif;
 }
 
-p {    
+p {
     padding: 16px;
-    img {
-        width: 100%;
-    }
 }
 
 header {
@@ -65,7 +63,10 @@ main {
             display: block;
             margin-left: auto;
             margin-right: auto;
-        }
+            @include xs {
+                width: 100%;
+            }
+        }        
         a {
             color: green;
         }
@@ -82,7 +83,6 @@ main {
         display: flex;
         justify-content: center;
         a {
-            
             padding: 0.35em 1.2em;
             border: 0.1em solid #ffffff;
             margin: 0 0.3em 0.3em 0;
@@ -94,6 +94,43 @@ main {
             text-align: center;
             transition: all 0.2s;
             background-color: #ddd7c6;
+        }
+    }
+    .icon-and-text {
+        display: flexbox;
+        justify-content: flex-start;
+        div {
+            img {
+                width: 25%;
+            }
+        }
+        @include xs {
+            > div {
+                display: flexbox;
+                flex-direction: column;
+                justify-content: center;                
+                div {
+                    display: flexbox;
+                    text-align: center;
+                    img {
+                        width: 15%;
+                    }
+                }
+            }
+        }
+    }
+    .how-it-works-container {
+        display: flexbox;
+        align-items: flex-end;
+        justify-content: space-evenly;
+        background-color: rosybrown;
+        @include gt-xs {
+            h1 {
+                align-self: flex-start;
+            }
+            .icon-and-text {
+                align-self: flex-end;
+            }
         }
     }
 }
