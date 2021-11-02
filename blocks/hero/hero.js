@@ -1,12 +1,14 @@
-import {    
-    applyTemplate,    
+import {
+    applyTemplate,
 } from '/scripts.js';
 
-export default async function process($block, blockName, document) {        
-    const $template = applyTemplate($block, blockName, mine)    
+export default async function process($block, blockName, templateFileName, document) {
+    if (templateFileName) {
+        const $template = applyTemplate($block, blockName, templateFileName, mine)
+    }
 }
 
-function mine(data) {    
-    return data;
+function mine(content) {
+    return content;
 }
 
