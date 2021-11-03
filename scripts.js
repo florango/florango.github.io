@@ -139,11 +139,16 @@ async function loadHeader() {
   document.querySelector('header').innerHTML = html;
 }
 
+function decorateButtons() {
+
+}
+
 async function decoratePage() {
   wrapSections('main > div');
   loadHeader();
   decorateFullWidthImage();
   decorateBlocks();
+  decorateButtons()
   const $img = document.querySelector('main img');
   if ($img) {
     if ($img.complete) {

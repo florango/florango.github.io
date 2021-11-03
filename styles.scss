@@ -71,66 +71,12 @@ main {
             color: green;
         }
         a:only-child {
-            color: red;
+            //color: red;
         }
     }
     .full-width-image {
         img {
             width: 100%;
         }
-    }
-    .button {
-        display: flex;
-        justify-content: center;
-        a {
-            padding: 0.35em 1.2em;
-            border: 0.1em solid #ffffff;
-            margin: 0 0.3em 0.3em 0;
-            border-radius: 0.12em;
-            color: black;
-            box-sizing: border-box;
-            text-decoration: none;
-            font-weight: 300;
-            text-align: center;
-            transition: all 0.2s;
-            background-color: #ddd7c6;
-        }
-    }
-    .icon-and-text {
-        display: flexbox;
-        justify-content: flex-start;
-        div {
-            img {
-                width: 25%;
-            }
-        }
-        @include xs {
-            > div {
-                display: flexbox;
-                flex-direction: column;
-                justify-content: center;                
-                div {
-                    display: flexbox;
-                    text-align: center;
-                    img {
-                        width: 15%;
-                    }
-                }
-            }
-        }
-    }
-    .how-it-works-container {
-        display: flexbox;
-        align-items: flex-end;
-        justify-content: space-evenly;
-        background-color: rosybrown;
-        @include gt-xs {
-            h1 {
-                align-self: flex-start;
-            }
-            .icon-and-text {
-                align-self: flex-end;
-            }
-        }
-    }
+    }        
 }

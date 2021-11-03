@@ -380,61 +380,6 @@ main p img {
 main p a {
   color: green;
 }
-main p a:only-child {
-  color: red;
-}
 main .full-width-image img {
   width: 100%;
-}
-main .button {
-  display: flex;
-  justify-content: center;
-}
-main .button a {
-  padding: 0.35em 1.2em;
-  border: 0.1em solid #ffffff;
-  margin: 0 0.3em 0.3em 0;
-  border-radius: 0.12em;
-  color: black;
-  box-sizing: border-box;
-  text-decoration: none;
-  font-weight: 300;
-  text-align: center;
-  transition: all 0.2s;
-  background-color: #ddd7c6;
-}
-main .icon-and-text {
-  display: flexbox;
-  justify-content: flex-start;
-}
-main .icon-and-text div img {
-  width: 25%;
-}
-@media screen and (max-width: 599px) {
-  main .icon-and-text > div {
-    display: flexbox;
-    flex-direction: column;
-    justify-content: center;
-  }
-  main .icon-and-text > div div {
-    display: flexbox;
-    text-align: center;
-  }
-  main .icon-and-text > div div img {
-    width: 15%;
-  }
-}
-main .how-it-works-container {
-  display: flexbox;
-  align-items: flex-end;
-  justify-content: space-evenly;
-  background-color: rosybrown;
-}
-@media screen and (min-width: 600px) {
-  main .how-it-works-container h1 {
-    align-self: flex-start;
-  }
-  main .how-it-works-container .icon-and-text {
-    align-self: flex-end;
-  }
 }/*# sourceMappingURL=styles.css.map */
