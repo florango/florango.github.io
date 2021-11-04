@@ -19,38 +19,43 @@ function processNode($node, $contentModel) {
       if (q) {
         $content = $contentModel.querySelector(q);
         $any.innerHTML = ($content) ? $content?.outerHTML : ' ';
-        // $any.replaceWith($any.firstChild);
+        $any.replaceWith($any.firstChild);
       }
       break;
     case 'REPEAT':
       console.log('repeat');
-      $any = $node;
-      let $childTemplate
-      // let $childTemplate = createTag('div');
-      // $childTemplate.innerHTML = $any.innerHTML;
-      // console.log($childTemplate)
-      const includeHTML = $any.innerHTML;
-      q = $any.getAttribute('q');
-      name = $any.getAttribute('name') || q;
+      $repeat = $node;
+      //let $childTemplate
+      const repeatedHTML = $repeat.innerHTML;
+      q = $repeat.getAttribute('q');
+      name = $repeat.getAttribute('name') || q;
       let $contents = $contentModel.querySelectorAll(q);
-      $any.replaceChildren();
-      let children = [];
+      $repeat.replaceChildren();
       $contents.forEach($content => {
-        let $childrenContents = $content.childNodes;
-        if ($childrenContents) {
-          $childrenContents.forEach($childContent => {
-            $childTemplate = createTag('div');
-            $childTemplate.innerHTML = includeHTML;
-            visitNode($childTemplate, $childContent)
-            children.push($childTemplate);
-            $any.appendChild($childTemplate)
-          })
-        }
+        const $childTemplate = createTag('div');
+        $childTemplate.innerHTML = repeatedHTML;
+        visitNode($childTemplate, $content);
+        $repeat.append($childTemplate);
       })
+
+      $repeat.append('<span>hello</span>');
+
+      // $contents.forEach($content => {
+      //   let $childrenContents = $content.childNodes;
+      //   if ($childrenContents) {
+      //     $childrenContents.forEach($childContent => {
+      //       $childTemplate = createTag('div');
+      //       $childTemplate.innerHTML = includeHTML;
+      //       visitNode($childTemplate, $childContent)
+      //       children.push($childTemplate);
+      //       $any.appendChild($childTemplate)
+      //     })
+      //   }
+      // })
       // for(let i in children) {
       //   $any.appendChild(children[i])
       // }
-      // $node.replaceWith($any)
+      //$node.replaceWith($repeat)
       break;
     default:
     //console.log($node)
