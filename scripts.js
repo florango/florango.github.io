@@ -1,68 +1,5 @@
-function visitNode($node, $content) {
-  //$node = $node || document;
-
-  processNode($node, $content);
-  if ($node.firstChild)
-    visitNode($node.firstChild, $content);
-  if ($node.nextSibling)
-    visitNode($node.nextSibling, $content);
-}
-
-function processNode($node, $contentModel) {
-  let $any, $repeat, q, name, $content;
-  switch ($node.tagName) {
-    case 'ANY':
-      console.log('any');
-      $any = $node;
-      q = $any.getAttribute('q');
-      name = $any.getAttribute('name') || q;
-      if (q) {
-        $content = $contentModel.querySelector(q);
-        $any.innerHTML = ($content) ? $content?.outerHTML : ' ';
-        $any.replaceWith($any.firstChild);
-      }
-      break;
-    case 'REPEAT':
-      console.log('repeat');
-      $repeat = $node;
-      //let $childTemplate
-      const repeatedHTML = $repeat.innerHTML;
-      q = $repeat.getAttribute('q');
-      name = $repeat.getAttribute('name') || q;
-      let $contents = $contentModel.querySelectorAll(q);
-      $repeat.replaceChildren();
-      $contents.forEach($content => {
-        const $childTemplate = createTag('div');
-        $childTemplate.innerHTML = repeatedHTML;
-        visitNode($childTemplate, $content);
-        $repeat.append($childTemplate);
-      })
-
-      $repeat.append('<span>hello</span>');
-
-      // $contents.forEach($content => {
-      //   let $childrenContents = $content.childNodes;
-      //   if ($childrenContents) {
-      //     $childrenContents.forEach($childContent => {
-      //       $childTemplate = createTag('div');
-      //       $childTemplate.innerHTML = includeHTML;
-      //       visitNode($childTemplate, $childContent)
-      //       children.push($childTemplate);
-      //       $any.appendChild($childTemplate)
-      //     })
-      //   }
-      // })
-      // for(let i in children) {
-      //   $any.appendChild(children[i])
-      // }
-      //$node.replaceWith($repeat)
-      break;
-    default:
-    //console.log($node)
-  }
-  // console.log($node)
-  // console.log($content)
-}
+Element.prototype.isNodeList = function () { return false; }
+NodeList.prototype.isNodeList = HTMLCollection.prototype.isNodeList = function () { return true; }
 
 async function fetchTemplate(blockName, templateFileName) {
   const resp = await fetch(`/blocks/${blockName}/${templateFileName}`);
@@ -76,35 +13,41 @@ export async function applyTemplate($block, blockName, templateFileName, modifie
 
   console.log(blockName + ':::')
   const $template = await fetchTemplate(blockName, templateFileName);
-
-  visitNode($template, $block);
-
-
-
-  // const $anys = Array.from($template.querySelectorAll('any[q]'));
-  // let content = [];
-  // $anys.forEach(($any) => {
-  //   const q = $any.getAttribute('q');
-  //   let name = $any.getAttribute('name') || q;
-  //   if (q) {
-  //     const $content = $block.querySelector(q);
-  //     let record = {
-  //       name, $any, $content,
-  //     };
-  //     content = [...content, record];
-  //   }
-  // });
-  // if (modifierFunc) {
-  //   modifierFunc(content);
-  // }
-  // for (let i in content) {
-  //   const record = content[i];
-  //   const name = record['name'];
-  //   const $any = record['$any'];
-  //   const $content = record['$content'];
-  //   $any.innerHTML = ($content) ? $content?.outerHTML : ' ';
-  //   $any.replaceWith($any.firstChild);
-  // }
+  const $anys = Array.from($template.querySelectorAll('[q]'));
+  let content = [];
+  $anys.forEach(($any) => {
+    const q = $any.getAttribute('q');
+    let name = $any.getAttribute('name') || q;
+    const loop = $any.getAttribute('loop');
+    if (q) {
+      let $content
+      if (loop) {
+        $content = $block.querySelectorAll(q);
+      } else {
+        $content = $block.querySelector(q);
+      }
+      let record = {
+        name, $any, $content,
+      };
+      content = [...content, record];
+    }
+  });
+  if (modifierFunc) {
+    modifierFunc(content);
+  }
+  for (let i in content) {
+    const record = content[i];
+    const name = record['name'];
+    const $any = record['$any'];
+    const $content = record['$content'];
+    if ($content.isNodeList()) {
+      $content.forEach($n => {
+        $any.appendChild($n);
+      })
+    } else
+      $any.innerHTML = ($content) ? $content?.outerHTML : ' ';
+    //$any.replaceWith($any.firstChild);
+  }
   $block.innerHTML = $template.innerHTML;
   console.log('///' + blockName)
 }
