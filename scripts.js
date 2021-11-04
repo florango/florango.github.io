@@ -1,33 +1,107 @@
-export async function applyTemplate($block, blockName, templateFileName, modifierFunc) {
+function visitNode($node, $content) {
+  //$node = $node || document;
+
+  processNode($node, $content);
+  if ($node.firstChild)
+    visitNode($node.firstChild, $content);
+  if ($node.nextSibling)
+    visitNode($node.nextSibling, $content);
+}
+
+function processNode($node, $contentModel) {
+  let $any, $repeat, q, name, $content;
+  switch ($node.tagName) {
+    case 'ANY':
+      console.log('any');
+      $any = $node;
+      q = $any.getAttribute('q');
+      name = $any.getAttribute('name') || q;
+      if (q) {
+        $content = $contentModel.querySelector(q);
+        $any.innerHTML = ($content) ? $content?.outerHTML : ' ';
+        // $any.replaceWith($any.firstChild);
+      }
+      break;
+    case 'REPEAT':
+      console.log('repeat');
+      $any = $node;
+      let $childTemplate
+      // let $childTemplate = createTag('div');
+      // $childTemplate.innerHTML = $any.innerHTML;
+      // console.log($childTemplate)
+      const includeHTML = $any.innerHTML;
+      q = $any.getAttribute('q');
+      name = $any.getAttribute('name') || q;
+      let $contents = $contentModel.querySelectorAll(q);
+      $any.replaceChildren();
+      let children = [];
+      $contents.forEach($content => {
+        let $childrenContents = $content.childNodes;
+        if ($childrenContents) {
+          $childrenContents.forEach($childContent => {
+            $childTemplate = createTag('div');
+            $childTemplate.innerHTML = includeHTML;
+            visitNode($childTemplate, $childContent)
+            children.push($childTemplate);
+            $any.appendChild($childTemplate)
+          })
+        }
+      })
+      // for(let i in children) {
+      //   $any.appendChild(children[i])
+      // }
+      // $node.replaceWith($any)
+      break;
+    default:
+    //console.log($node)
+  }
+  // console.log($node)
+  // console.log($content)
+}
+
+async function fetchTemplate(blockName, templateFileName) {
   const resp = await fetch(`/blocks/${blockName}/${templateFileName}`);
   const markup = await resp?.text();
   const $template = document.createElement('div');
   $template.innerHTML = markup;
-  const $anys = Array.from($template.querySelectorAll('any[q]'));
-  let content = [];
-  $anys.forEach(($any) => {
-    const q = $any.getAttribute('q');
-    let name = $any.getAttribute('name') || q;
-    if (q) {
-      const $content = $block.querySelector(q);
-      let record = {
-        name, $any, $content,
-      };
-      content = [...content, record];
-    }
-  });
-  if (modifierFunc) {
-    modifierFunc(content);
-  }
-  for (let i in content) {
-    const record = content[i];
-    const name = record['name'];
-    const $any = record['$any'];
-    const $content = record['$content'];
-    $any.innerHTML = $content.outerHTML;
-    $any.replaceWith($any.firstChild);
-  }
+  return $template;
+}
+
+export async function applyTemplate($block, blockName, templateFileName, modifierFunc) {
+
+  console.log(blockName + ':::')
+  const $template = await fetchTemplate(blockName, templateFileName);
+
+  visitNode($template, $block);
+
+
+
+  // const $anys = Array.from($template.querySelectorAll('any[q]'));
+  // let content = [];
+  // $anys.forEach(($any) => {
+  //   const q = $any.getAttribute('q');
+  //   let name = $any.getAttribute('name') || q;
+  //   if (q) {
+  //     const $content = $block.querySelector(q);
+  //     let record = {
+  //       name, $any, $content,
+  //     };
+  //     content = [...content, record];
+  //   }
+  // });
+  // if (modifierFunc) {
+  //   modifierFunc(content);
+  // }
+  // for (let i in content) {
+  //   const record = content[i];
+  //   const name = record['name'];
+  //   const $any = record['$any'];
+  //   const $content = record['$content'];
+  //   $any.innerHTML = ($content) ? $content?.outerHTML : ' ';
+  //   $any.replaceWith($any.firstChild);
+  // }
   $block.innerHTML = $template.innerHTML;
+  console.log('///' + blockName)
 }
 
 export function createTag(name, attrs) {
