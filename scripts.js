@@ -1,10 +1,110 @@
 Element.prototype.isNodeList = function () { return false; }
 NodeList.prototype.isNodeList = HTMLCollection.prototype.isNodeList = function () { return true; }
 
+async function processNode($node, $contentModel) {
+  console.log($node);
+}
+
+function visitNode($node, $contentModel) {
+
+  let $any, $repeat, q, name, $content;
+  if (($node?.nodeType != Node.TEXT_NODE)) {
+    const $repeater = $node.getAttribute('multi');
+    q = $node.getAttribute('q');
+    name = $node.getAttribute('name') || q;
+    if (q) {
+      if ($repeater) {
+        console.log('repeat')
+        $repeat = $node;
+        const repeatedHTML = $repeat.innerHTML;
+        let $contents = $contentModel.querySelectorAll(q);
+        $repeat.replaceChildren();
+        $contents.forEach($subContentModel => {
+          const $childTemplate = createTag('div', { class: 'subtemplate-wrapper' });
+          $childTemplate.innerHTML = repeatedHTML;
+          processNode($childTemplate, $subContentModel);
+          if ($node.firstChild)
+            visitNode($childTemplate, $subContentModel);
+          if ($node.nextSibling)
+            visitNode($childTemplate, $subContentModel);
+          $repeat.append($childTemplate);
+        })
+      } else {
+        console.log('any')
+        $any = $node;
+        if (q) {
+          $content = $contentModel.querySelector(q);
+          $any.innerHTML = ($content) ? $content?.outerHTML : ' ';
+          //$any.replaceWith($any.firstChild);
+        }
+        processNode($node, $contentModel);
+        if ($node.firstChild)
+          visitNode($node.firstChild, $contentModel);
+        if ($node.nextSibling)
+          visitNode($node.nextSibling, $contentModel);
+      }
+    } else {
+      processNode($node, $contentModel);
+      if ($node.firstChild)
+        visitNode($node.firstChild, $contentModel);
+      if ($node.nextSibling)
+        visitNode($node.nextSibling, $contentModel);
+    }
+  } else {
+    processNode($node, $contentModel);
+    if ($node.firstChild)
+      visitNode($node.firstChild, $contentModel);
+    if ($node.nextSibling)
+      visitNode($node.nextSibling, $contentModel);
+  }
+}
+
+
+
+
+
+
+async function eprocessNode($node, $contentModel) {
+  let $any, $repeat, q, name, $content;
+  if (($node?.nodeType != Node.TEXT_NODE)) {
+    const $repeater = $node.getAttribute('multi');
+    q = $node.getAttribute('q');
+    name = $node.getAttribute('name') || q;
+    if (q) {
+      if ($repeater) {
+        console.log('repeat')
+        $repeat = $node;
+        const repeatedHTML = $repeat.innerHTML;
+        let $contents = $contentModel.querySelectorAll(q);
+        $repeat.replaceChildren();
+        $contents.forEach($subContentModel => {
+          const $childTemplate = createTag('div', { class: 'subtemplate-wrapper' });
+          $childTemplate.innerHTML = repeatedHTML;
+          visitNode($childTemplate, $subContentModel);
+          $repeat.append($childTemplate);
+        })
+      } else {
+        console.log('any')
+        $any = $node;
+        if (q) {
+          $content = $contentModel.querySelector(q);
+          $any.innerHTML = ($content) ? $content?.outerHTML : ' ';
+          $any.replaceWith($any.firstChild);
+        }
+        visitNode($node, $contentModel);
+      }
+    } else {
+      console.log('normal')
+      visitNode($node, $contentModel);
+    }
+  }
+}
+
+
 async function fetchTemplate(blockName, templateFileName) {
   const resp = await fetch(`/blocks/${blockName}/${templateFileName}`);
   const markup = await resp?.text();
-  const $template = document.createElement('div');
+  const $template = createTag('div', { class: 'template-wrapper' });
   $template.innerHTML = markup;
   return $template;
 }
@@ -13,41 +113,48 @@ export async function applyTemplate($block, blockName, templateFileName, modifie
 
   console.log(blockName + ':::')
   const $template = await fetchTemplate(blockName, templateFileName);
-  const $anys = Array.from($template.querySelectorAll('[q]'));
-  let content = [];
-  $anys.forEach(($any) => {
-    const q = $any.getAttribute('q');
-    let name = $any.getAttribute('name') || q;
-    const loop = $any.getAttribute('loop');
-    if (q) {
-      let $content
-      if (loop) {
-        $content = $block.querySelectorAll(q);
-      } else {
-        $content = $block.querySelector(q);
-      }
-      let record = {
-        name, $any, $content,
-      };
-      content = [...content, record];
-    }
-  });
-  if (modifierFunc) {
-    modifierFunc(content);
-  }
-  for (let i in content) {
-    const record = content[i];
-    const name = record['name'];
-    const $any = record['$any'];
-    const $content = record['$content'];
-    if ($content.isNodeList()) {
-      $content.forEach($n => {
-        $any.appendChild($n);
-      })
-    } else
-      $any.innerHTML = ($content) ? $content?.outerHTML : ' ';
-    //$any.replaceWith($any.firstChild);
-  }
+
+
+
+  visitNode($template, $block);
+
+
+
+  // const $anys = Array.from($template.querySelectorAll('[q]'));
+  // let content = [];
+  // $anys.forEach(($any) => {
+  //   const q = $any.getAttribute('q');
+  //   let name = $any.getAttribute('name') || q;
+  //   const loop = $any.getAttribute('loop');
+  //   if (q) {
+  //     let $content
+  //     if (loop) {
+  //       $content = $block.querySelectorAll(q);
+  //     } else {
+  //       $content = $block.querySelector(q);
+  //     }
+  //     let record = {
+  //       name, $any, $content,
+  //     };
+  //     content = [...content, record];
+  //   }
+  // });
+  // if (modifierFunc) {
+  //   modifierFunc(content);
+  // }
+  // for (let i in content) {
+  //   const record = content[i];
+  //   const name = record['name'];
+  //   const $any = record['$any'];
+  //   const $content = record['$content'];
+  //   if ($content.isNodeList()) {
+  //     $content.forEach($n => {
+  //       $any.appendChild($n);
+  //     })
+  //   } else
+  //     $any.innerHTML = ($content) ? $content?.outerHTML : ' ';
+  //   //$any.replaceWith($any.firstChild);
+  // }
   $block.innerHTML = $template.innerHTML;
   console.log('///' + blockName)
 }
