@@ -1,5 +1,5 @@
 {
-    "heros": {
+    "hero": {
         "script": "hero.js",
         "styles": "hero.css",
         "template": "template.html"

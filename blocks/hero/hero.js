@@ -4,11 +4,7 @@ import {
 
 export default async function process($block, blockName, templateFileName, document) {
     if (templateFileName) {
-        const $template = await applyTemplate($block, blockName, templateFileName, mine)
+        const $template = await applyTemplate($block, blockName, templateFileName)
     }
-}
-
-function mine(content) {
-    return content;
 }
 

@@ -4,11 +4,11 @@ import {
 
 export default async function process($block, blockName, templateFileName, document) {
   if (templateFileName) {
-      const $template = await applyTemplate($block, blockName, templateFileName, mine)
+      const $template = applyTemplate($block, blockName, templateFileName)
   }
 }
 
-function mine(content) {
-  // console.log(document.querySelectorAll('.columns >div >div'))
-  return content;
+function mine($contentModel) {
+  console.log($contentModel)
+  return $contentModel;
 }
