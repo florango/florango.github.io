@@ -3,7 +3,7 @@
 @import url("https://fonts.googleapis.com/css?family=Hammersmith+One&display=swap");
 @import url("https://fonts.googleapis.com/css?family=Josefin+Sans&display=swap");
 
-@import './styles/media-queries.scss';
+@import "./styles/media-queries.scss";
 @import "./styles/reset";
 
 body {
@@ -66,7 +66,7 @@ main {
             @include xs {
                 width: 100%;
             }
-        }        
+        }
         a {
             color: green;
         }
@@ -78,5 +78,40 @@ main {
         img {
             width: 100%;
         }
-    }        
+    }
+}
+
+footer {
+    > div {
+        display: flex;
+        justify-content: center;
+    }
+    #social-links {
+        #ig {
+            > img {
+                width: 50px;
+            }
+        }
+    }
+    #footer-flor {
+        > img {
+            width: 100px;
+        }
+    }
+    #delivery-schedule {
+        font-size: 30px;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;        
+        align-items: center;
+        p {
+            width: fit-content;
+        }
+    }
+    #address {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;        
+        align-items: center;
+    }
 }

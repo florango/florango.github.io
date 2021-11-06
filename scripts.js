@@ -171,9 +171,15 @@ function decorateButtons() {
 
 }
 
+async function loadFooter() {
+  const resp = await fetch('/footer.html');
+  const html = await resp.text();
+  document.querySelector('footer').innerHTML = html;
+}
+
 async function decoratePage() {
   wrapSections('main > div');
-  loadHeader();
+  loadHeader();  
   decorateFullWidthImage();
   decorateBlocks();
   decorateButtons()
@@ -191,14 +197,15 @@ async function decoratePage() {
     }
   } else {
     loadLater();
-  }
-  document.querySelector('main').classList.add('appear');
+  }  
+  document.querySelector('main').classList.add('appear');  
 }
 
 function loadLater() {
   document.body.classList.add('appear');
   loadBlocks();
   loadCSS('/styles/lazy-styles.css');
+  loadFooter();
 }
 
 decoratePage();

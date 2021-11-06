@@ -1,0 +1,1 @@
+https://www.hlx.live/tools/sidekick/?project=Florango&from=&giturl=https%3A%2F%2Fgithub.com%2Fflorango%2Fwebsite%2Ftree%2Fmain
