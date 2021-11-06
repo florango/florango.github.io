@@ -22,6 +22,7 @@ function visitNode($node, $contentModel, modifierFunc) {
         $repeat.replaceChildren();
         $contents.forEach($subContentModel => {
           const $childTemplate = createTag('div', { class: 'subtemplate-wrapper' });
+          //TODO: Need to check the subtemplate is empty; if so, just fill with what's in the subContentModel.
           $childTemplate.innerHTML = repeatedHTML;
           processNode($childTemplate, $subContentModel);
           $repeat.append($childTemplate);

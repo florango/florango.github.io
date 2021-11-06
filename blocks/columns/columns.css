@@ -1,0 +1,9 @@
+.columns .columns-container {
+  display: flex;
+  justify-content: space-evenly;
+}
+@media screen and (max-width: 599px) {
+  .columns .columns-container {
+    flex-direction: column;
+  }
+}/*# sourceMappingURL=columns.css.map */

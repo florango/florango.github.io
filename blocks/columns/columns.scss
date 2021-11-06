@@ -1,0 +1,10 @@
+@import "../../styles/media-queries.scss";
+.columns {
+    .columns-container {
+        display: flex;
+        justify-content: space-evenly;
+        @include xs {
+            flex-direction: column;
+        }
+    }
+}

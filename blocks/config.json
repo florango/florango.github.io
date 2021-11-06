@@ -9,6 +9,7 @@
     },
     "columns": {
         "script": "columns.js",
-        "template": "columns.html"
+        "styles": "columns.css",
+        "template": "template.html"
     }
 }

@@ -1,7 +1,7 @@
 @import '../../styles/media-queries.scss';
 
 .hero-container {
-  margin: 0;
+  margin: 0; 
   .hero {
     position: relative;
     display: flexbox;
@@ -21,7 +21,7 @@
       background-color: #00000040;
       padding: 12px;
       @include xs {
-        top: 20%; 
+        top: 30%; 
       }
     }
   }
