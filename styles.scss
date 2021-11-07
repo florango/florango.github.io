@@ -58,6 +58,20 @@ header {
 main {
     margin-top: 56px;
     min-height: calc(100vh - 197px);
+    a.button {
+        display: inline-block;
+        padding: 0.35em 1.2em;
+        border: 0.1em solid #ffffff;
+        margin: 0 0.3em 0.3em 0;
+        border-radius: 0.12em;
+        box-sizing: border-box;
+        text-decoration: none;
+        font-weight: 300;
+        color: black;
+        text-align: center;
+        transition: all 0.2s;
+        background-color: #ddd7c6;
+    }
     p {
         img {
             display: block;
@@ -79,14 +93,34 @@ main {
             width: 100%;
         }
     }
+    .section-wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        > div {
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+        }
+    }
 }
 
 footer {
+    padding: 16px;
+    p {
+        padding: 0px;
+        margin: 0px;
+    }
+    background-color: #879988;
+    color: rgb(221, 215, 198);
     > div {
         display: flex;
         justify-content: center;
     }
     #social-links {
+        padding: 16px;
         #ig {
             > img {
                 width: 50px;
@@ -94,24 +128,32 @@ footer {
         }
     }
     #footer-flor {
+        padding: 30px;
         > img {
             width: 100px;
+            path {
+                fill: #ff0000;
+            }
         }
     }
     #delivery-schedule {
-        font-size: 30px;
+        padding: 30px;
         display: flex;
         justify-content: center;
-        flex-direction: column;        
+        flex-direction: column;
         align-items: center;
         p {
             width: fit-content;
+            :nth-child(1) {
+                font-weight: bold;
+            }
         }
     }
     #address {
+        padding: 30px;
         display: flex;
         justify-content: center;
-        flex-direction: column;        
+        flex-direction: column;
         align-items: center;
     }
 }

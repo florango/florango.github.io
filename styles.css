@@ -367,6 +367,20 @@ main {
   margin-top: 56px;
   min-height: calc(100vh - 197px);
 }
+main a.button {
+  display: inline-block;
+  padding: 0.35em 1.2em;
+  border: 0.1em solid #ffffff;
+  margin: 0 0.3em 0.3em 0;
+  border-radius: 0.12em;
+  box-sizing: border-box;
+  text-decoration: none;
+  font-weight: 300;
+  color: black;
+  text-align: center;
+  transition: all 0.2s;
+  background-color: #ddd7c6;
+}
 main p img {
   display: block;
   margin-left: auto;
@@ -383,19 +397,49 @@ main p a {
 main .full-width-image img {
   width: 100%;
 }
+main .section-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+main .section-wrapper > div {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
 
+footer {
+  padding: 16px;
+  background-color: #879988;
+  color: #ddd7c6;
+}
+footer p {
+  padding: 0px;
+  margin: 0px;
+}
 footer > div {
   display: flex;
   justify-content: center;
 }
+footer #social-links {
+  padding: 16px;
+}
 footer #social-links #ig > img {
   width: 50px;
+}
+footer #footer-flor {
+  padding: 30px;
 }
 footer #footer-flor > img {
   width: 100px;
 }
+footer #footer-flor > img path {
+  fill: #ff0000;
+}
 footer #delivery-schedule {
-  font-size: 30px;
+  padding: 30px;
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -406,7 +450,11 @@ footer #delivery-schedule p {
   width: -moz-fit-content;
   width: fit-content;
 }
+footer #delivery-schedule p :nth-child(1) {
+  font-weight: bold;
+}
 footer #address {
+  padding: 30px;
   display: flex;
   justify-content: center;
   flex-direction: column;

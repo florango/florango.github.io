@@ -1,9 +1,13 @@
 .hero-container {
+  display: flex;
+  width: 100%;
   margin: 0;
 }
+.hero-container div {
+  width: 100%;
+}
 .hero-container .hero {
-  position: relative;
-  display: flexbox;
+  display: flex;
   width: 100%;
 }
 .hero-container .hero img {
@@ -18,12 +22,14 @@
   left: 0;
   right: 0;
   text-align: center;
-  color: white;
+  color: #ede6d2;
   background-color: #00000040;
   padding: 12px;
+  font-size: 2rem;
 }
 @media screen and (max-width: 599px) {
   .hero-container .hero .belt {
-    top: 30%;
+    top: 20%;
+    font-size: 1rem;
   }
 }/*# sourceMappingURL=hero.css.map */
